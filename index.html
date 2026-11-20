@@ -885,16 +885,18 @@ Longitude: ${v[1]}`,
     {label:"Measured voltage (V)",value:"27.5"}
   ],
   tests:[
-    ["27.5"],["28"],["29.5"],["26"]
+    ["27.5"],["28"],["29.5"],["26"],
+    ["26.4"],["28.1"]
   ],
   expectedFor:v=>{
     const measured=Number(v[0]);
-    const difference=measured-28;
+    const difference=Number((measured-28).toFixed(10));
     return `BATTERY MONITOR
 Measured: ${measured} V
 Difference: ${difference} V`;
   },
-  rule:"battery"
+  rule:"battery",
+  numericValidation:true
 },
 {
   title:"Flight Data Recorder",
@@ -1611,7 +1613,45 @@ function normalize(text){
 function hasPythonError(text){
   return /(^|\n)(Traceback \(most recent call last\):|[A-Za-z]+Error:|SyntaxError:)/.test(text);
 }
-function outputMatches(actual,expected){
+
+/*
+  CHALLENGE 8 FIX:
+  Compare the numeric battery readings using a tolerance,
+  instead of requiring identical floating-point text.
+*/
+function batteryOutputMatches(actual,values){
+  const lines=normalize(actual).split("\n");
+  if(lines.length!==3)return false;
+  if(lines[0]!=="BATTERY MONITOR")return false;
+
+  const measuredMatch=lines[1].match(
+    /^Measured:\s*(-?(?:\d+\.?\d*|\.\d+)) V$/
+  );
+  const differenceMatch=lines[2].match(
+    /^Difference:\s*(-?(?:\d+\.?\d*|\.\d+)) V$/
+  );
+
+  if(!measuredMatch||!differenceMatch)return false;
+
+  const measured=Number(measuredMatch[1]);
+  const difference=Number(differenceMatch[1]);
+  const expectedMeasured=Number(values[0]);
+  const expectedDifference=expectedMeasured-28;
+
+  if(!Number.isFinite(measured)||
+     !Number.isFinite(difference))return false;
+
+  const tolerance=1e-9;
+
+  return (
+    Math.abs(measured-expectedMeasured)<=tolerance &&
+    Math.abs(difference-expectedDifference)<=tolerance
+  );
+}
+function outputMatches(actual,expected,c,values){
+  if(c.numericValidation){
+    return batteryOutputMatches(actual,values);
+  }
   return normalize(actual)===normalize(expected);
 }
 function expectedFor(c,values){
@@ -1678,7 +1718,7 @@ async function runCode(){
     }
 
     const visiblePass=outputMatches(
-      output,expectedFor(c,values)
+      output,expectedFor(c,values),c,values
     );
     let allPass=visiblePass;
 
@@ -1686,7 +1726,10 @@ async function runCode(){
       for(const testValues of c.tests){
         const testOutput=await executePython(code,testValues);
         if(!outputMatches(
-          testOutput,expectedFor(c,testValues)
+          testOutput,
+          expectedFor(c,testValues),
+          c,
+          testValues
         )){
           allPass=false;
           break;
