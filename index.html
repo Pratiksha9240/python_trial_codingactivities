@@ -3,70 +3,98 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aerospace Python Challenges | Alphagen Learning</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aerospace Electronics | Python Operator Challenges</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
 :root{
   --purple:#5E48C4;
-  --dark:#4A3AAD;
-  --mid:#7B6ED4;
-  --pale:#EAE7FE;
-  --ghost:#F5F4FF;
+  --purpleDark:#4A3AAD;
+  --purpleMid:#7B6ED4;
+  --purplePale:#EAE7FE;
+  --purpleGhost:#F5F4FF;
   --yellow:#FFD071;
   --ink:#25243B;
+  --cyan:#28B5CB;
   --green:#19855A;
   --red:#C74B57;
+  --screen:#10182B;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
   padding:12px;
   background:#17102D;
-  color:var(--ink);
   font-family:Poppins,sans-serif;
+  color:var(--ink);
 }
 button,input,textarea{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.45;cursor:not-allowed}
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
 header{
-  max-width:1300px;
+  max-width:1320px;
   margin:0 auto 12px;
   padding:13px 20px;
-  border-radius:14px;
   background:var(--purple);
   color:white;
+  border-radius:14px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:12px;
   flex-wrap:wrap;
 }
-.brand{display:flex;align-items:center;gap:13px}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
 .logo{
   background:var(--yellow);
   color:var(--ink);
-  padding:9px 13px;
+  padding:10px 13px;
   border-radius:9px;
   font-size:11px;
   font-weight:800;
 }
-.brand-name{font-size:17px;font-weight:800}
+.brand-name{
+  font-size:16px;
+  font-weight:800;
+}
 .progress{
-  background:var(--dark);
+  background:var(--purpleDark);
   padding:9px 14px;
   border-radius:10px;
   font-size:12px;
   font-weight:700;
 }
 .progress strong{color:var(--yellow)}
+.progress-track{
+  height:5px;
+  width:100%;
+  background:#ffffff30;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:6px;
+}
+.progress-fill{
+  height:100%;
+  width:0;
+  background:var(--yellow);
+  transition:width .5s;
+}
 .stage{
-  max-width:1300px;
-  min-height:700px;
+  max-width:1320px;
+  min-height:710px;
   margin:auto;
   background:white;
   border-radius:23px;
@@ -74,24 +102,31 @@ header{
   display:flex;
   flex-direction:column;
 }
-.slide{display:none;flex:1;flex-direction:column}
+.slide{
+  display:none;
+  flex:1;
+  flex-direction:column;
+}
 .slide.active{display:flex}
 .center{
   justify-content:center;
   align-items:center;
   text-align:center;
 }
-h1{font-size:40px;margin:15px 0 7px}
+h1{
+  font-size:40px;
+  margin:15px 0 7px;
+}
 h1 span{color:var(--purple)}
 .subtitle{
-  max-width:590px;
+  max-width:620px;
   color:#666;
   font-size:14px;
   line-height:1.8;
 }
 .tag{
-  background:var(--ghost);
-  border:1px solid var(--pale);
+  background:var(--purpleGhost);
+  border:1px solid var(--purplePale);
   color:var(--purple);
   padding:8px 13px;
   border-radius:9px;
@@ -104,13 +139,23 @@ h1 span{color:var(--purple)}
   border-radius:10px;
   font-size:12px;
   font-weight:800;
+  transition:transform .2s;
 }
-.btn-purple{background:var(--purple);color:white}
-.btn-yellow{background:var(--yellow);color:var(--ink)}
+.btn:not(:disabled):hover{
+  transform:translateY(-2px);
+}
+.btn-purple{
+  background:var(--purple);
+  color:white;
+}
+.btn-yellow{
+  background:var(--yellow);
+  color:var(--ink);
+}
 .btn-light{
-  background:var(--ghost);
+  background:var(--purpleGhost);
   color:var(--purple);
-  border:1px solid var(--pale);
+  border:1px solid var(--purplePale);
 }
 .topline,.bottom{
   display:flex;
@@ -127,16 +172,59 @@ h1 span{color:var(--purple)}
 }
 .panel{
   min-width:0;
-  border:2px solid var(--pale);
+  border:2px solid var(--purplePale);
   border-radius:17px;
   padding:17px;
 }
-.panel h2{font-size:19px;margin:0 0 7px}
+.panel h2{
+  font-size:20px;
+  margin:0 0 8px;
+}
 .task{
   font-size:12px;
-  line-height:1.85;
+  line-height:1.8;
   color:#4f4d5d;
-  margin:0 0 13px;
+  margin:0 0 12px;
+}
+.steps{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  margin:12px 0;
+}
+.step{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  font-size:12px;
+  line-height:1.6;
+}
+.step-number{
+  flex-shrink:0;
+  width:23px;
+  height:23px;
+  border-radius:7px;
+  background:var(--purplePale);
+  color:var(--purple);
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  font-size:11px;
+}
+.operator-row{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:10px 0 15px;
+}
+.operator{
+  font-family:"Fira Code",monospace;
+  font-size:13px;
+  font-weight:600;
+  padding:5px 11px;
+  border-radius:7px;
+  background:#FFF2CD;
+  border:1px solid var(--yellow);
 }
 .panel-label{
   font-size:11px;
@@ -146,66 +234,42 @@ h1 span{color:var(--purple)}
   margin-bottom:9px;
 }
 .visual{
-  background:var(--ghost);
-  border:1px solid var(--pale);
+  background:var(--purpleGhost);
+  border:1px solid var(--purplePale);
   border-radius:14px;
-  padding:15px;
-  min-height:365px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
+  padding:13px;
 }
 .scene-title{
   color:var(--purple);
-  font-size:12px;
+  font-size:11px;
   font-weight:800;
   text-align:center;
+  margin-bottom:10px;
 }
 .scene{
   width:100%;
-  height:205px;
+  height:240px;
   position:relative;
-  border-radius:13px;
+  border-radius:12px;
   overflow:hidden;
-  background:linear-gradient(145deg,#101a32,#203b5b);
+  background:#102033;
+  color:white;
 }
 .scene-note{
-  min-height:22px;
-  font-size:12px;
+  min-height:24px;
+  margin-top:10px;
+  font-size:11px;
   font-weight:700;
-  color:var(--dark);
+  color:var(--purpleDark);
   text-align:center;
-}
-.result{
-  width:100%;
-  background:#FFF2C9;
-  border:1px solid var(--yellow);
-  border-radius:11px;
-  padding:9px 15px;
-  text-align:center;
-}
-.result small{
-  display:block;
-  font-size:10px;
-  font-weight:800;
-}
-.result strong{
-  display:block;
-  color:var(--purple);
-  font-size:12px;
-  white-space:pre-wrap;
-  font-family:"Fira Code",monospace;
-  overflow-wrap:anywhere;
 }
 .code-editor{
   width:100%;
-  min-height:290px;
+  min-height:270px;
   resize:vertical;
   border:0;
   outline:0;
-  background:#10182B;
+  background:var(--screen);
   color:#F0F5FF;
   border-radius:11px;
   padding:15px;
@@ -215,8 +279,8 @@ h1 span{color:var(--purple)}
 .input-area{
   margin-top:10px;
   padding:11px;
-  background:var(--ghost);
-  border:1px solid var(--pale);
+  background:var(--purpleGhost);
+  border:1px solid var(--purplePale);
   border-radius:10px;
 }
 .input-grid{
@@ -244,12 +308,14 @@ h1 span{color:var(--purple)}
   margin-top:11px;
 }
 .output{
-  background:#10182B;
+  background:var(--screen);
   color:#e7efff;
   border-radius:10px;
   padding:12px;
   margin-top:11px;
-  min-height:65px;
+  min-height:75px;
+  max-height:240px;
+  overflow:auto;
   font:11px/1.7 "Fira Code",monospace;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
@@ -259,11 +325,25 @@ h1 span{color:var(--purple)}
   margin-top:9px;
   font-size:11px;
   font-weight:700;
+  white-space:pre-wrap;
 }
 .feedback.good{color:var(--green)}
 .feedback.bad{color:var(--red)}
+.expected-box{
+  background:#FFF8E5;
+  border:1px solid var(--yellow);
+  border-radius:10px;
+  padding:11px;
+  margin-top:12px;
+}
+.expected-box pre{
+  margin:7px 0 0;
+  font:11px/1.7 "Fira Code",monospace;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
 .navigation{
-  max-width:1300px;
+  max-width:1320px;
   margin:12px auto;
   display:flex;
   align-items:center;
@@ -279,7 +359,10 @@ h1 span{color:var(--purple)}
   font-size:12px;
   font-weight:800;
 }
-.nav-info{color:white;font-size:12px}
+.nav-info{
+  color:white;
+  font-size:12px;
+}
 .finish-score{
   margin:22px 0;
   background:#FFF3CC;
@@ -293,904 +376,1741 @@ h1 span{color:var(--purple)}
   color:var(--purple);
 }
 
-/* Aircraft animation */
-.sky{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(#18365a,#4278a0);
-}
-.cloud{
-  position:absolute;
-  width:100px;
-  height:25px;
-  border-radius:40px;
-  background:#ffffff30;
-  animation:cloudMove 9s linear infinite;
-}
-.cloud.one{top:35px;left:15%}
-.cloud.two{top:105px;left:70%;animation-delay:-4s}
-.plane{
-  position:absolute;
-  left:12%;
-  top:47%;
-  color:white;
-  font-size:64px;
-  transform:rotate(-8deg);
-  transition:left 2s ease,top 2s ease;
-  filter:drop-shadow(0 5px 5px #0005);
-}
-.plane.fly{left:72%;top:22%}
-.runway{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:30px;
-  background:#252b39;
-  border-top:4px dashed #d6dce5;
-}
-.flight-label{
-  position:absolute;
-  top:12px;
-  left:12px;
-  max-width:90%;
-  background:#0d1d34dd;
-  color:#92f5d1;
-  padding:7px 11px;
-  border-radius:7px;
-  font:11px "Fira Code",monospace;
-  overflow-wrap:anywhere;
-}
-@keyframes cloudMove{
-  from{transform:translateX(-110px)}
-  to{transform:translateX(380px)}
-}
+/* INTRO ANIMATION */
 
-/* Checklist */
-.checklist{
+.hero{
+  width:340px;
+  max-width:100%;
+  height:220px;
+  position:relative;
+  margin:22px 0;
+}
+.hero-chip{
   position:absolute;
-  inset:12px 14%;
-  background:#e9f0f8;
-  border-radius:12px;
-  padding:13px 17px;
-  overflow:auto;
+  top:50%;
+  left:50%;
+  width:105px;
+  height:105px;
+  transform:translate(-50%,-50%);
+  border:7px solid #C9C0F8;
+  border-radius:17px;
+  background:var(--purple);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:42px;
+  box-shadow:0 0 0 10px var(--purpleGhost);
 }
-.checklist h3{
-  font-size:13px;
-  color:#25364d;
-  margin:0 0 9px;
+.hero-node{
+  position:absolute;
+  width:52px;
+  height:52px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:#FFF2CD;
+  border:2px solid var(--yellow);
+  font:700 22px "Fira Code",monospace;
+  animation:float 3s ease-in-out infinite;
 }
-.checkrow{
+.hero-node:nth-child(2){top:5px;left:20px}
+.hero-node:nth-child(3){top:5px;right:20px;animation-delay:.5s}
+.hero-node:nth-child(4){bottom:5px;left:20px;animation-delay:1s}
+.hero-node:nth-child(5){bottom:5px;right:20px;animation-delay:1.5s}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-9px)}
+}
+.hero-line{
+  position:absolute;
+  height:2px;
+  background:var(--purpleMid);
+  width:110px;
+  left:55px;
+  top:60px;
+  transform:rotate(28deg);
+  transform-origin:left;
+}
+.hero-line.b{
+  left:auto;
+  right:55px;
+  transform:rotate(-28deg);
+  transform-origin:right;
+}
+.hero-line.c{
+  top:auto;
+  bottom:60px;
+  transform:rotate(-28deg);
+}
+.hero-line.d{
+  left:auto;
+  right:55px;
+  top:auto;
+  bottom:60px;
+  transform:rotate(28deg);
+  transform-origin:right;
+}
+.categories{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #ccd7e4;
-  padding:8px 0;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin:0 0 25px;
+}
+.category{
+  padding:9px 14px;
+  border-radius:9px;
+  background:var(--purpleGhost);
+  border:1px solid var(--purplePale);
   font-size:12px;
   font-weight:700;
 }
-.checkrow i{color:#a5afba}
-.checkrow.done i{color:var(--green)}
-.checkrow.done{color:var(--green)}
 
-/* Terminal */
-.terminal{
-  position:absolute;
-  inset:10px;
-  border:1px solid #375678;
-  border-radius:9px;
-  background:#071626;
-  color:#83f5ca;
-  font:12px/1.8 "Fira Code",monospace;
-  padding:13px;
-  overflow:auto;
+/* ELECTRONICS BUDGET */
+
+.budget-scene{
+  height:100%;
+  padding:17px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:12px;
 }
-.terminal-title{
-  border-bottom:1px solid #30546b;
-  padding-bottom:7px;
-  margin-bottom:9px;
-  color:#ffd071;
+.component-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.component-icon{
+  width:40px;
+  height:40px;
+  flex-shrink:0;
+  background:#203E56;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  color:#77E6C5;
+  font-size:21px;
+}
+.component-info{
+  flex:1;
+  font-size:10px;
+  color:#B8D2E8;
+}
+.cost-track{
+  height:8px;
+  border-radius:6px;
+  background:#ffffff12;
+  overflow:hidden;
+  margin-top:6px;
+}
+.cost-fill{
+  height:100%;
+  width:0;
+  background:#65E4BE;
+  transition:width 1s;
+}
+.component-value{
+  font:14px "Fira Code",monospace;
+  color:#FFD071;
+}
+.total-display{
+  padding:10px;
+  border:1px solid #3D627A;
+  border-radius:9px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#081727;
   font-size:11px;
 }
-.terminal-line{
-  opacity:0;
-  transform:translateY(5px);
-  transition:opacity .35s,transform .35s;
-  white-space:pre-wrap;
+.total-display strong{
+  font:22px "Fira Code",monospace;
+  color:#77E6C5;
+}
+
+/* DIGITAL STORAGE */
+
+.memory-scene{
+  padding:20px;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.memory-chip{
+  background:#1B4050;
+  border:3px solid #6D8B9C;
+  border-radius:10px;
+  padding:14px;
+}
+.memory-heading{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  margin-bottom:12px;
+  color:#C1DBEB;
+}
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:5px;
+}
+.memory-cell{
+  aspect-ratio:1;
+  border-radius:3px;
+  background:#ffffff14;
+  transition:background .3s,box-shadow .3s;
+}
+.memory-cell.active{
+  background:#4DDEB3;
+  box-shadow:0 0 8px #4DDEB355;
+}
+.reading-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:13px;
+}
+.reading{
+  background:#091726;
+  border:1px solid #35546C;
+  border-radius:9px;
+  padding:10px;
+  text-align:center;
+}
+.reading small{
+  display:block;
+  font-size:9px;
+  color:#A6BED1;
+}
+.reading strong{
+  display:block;
+  margin-top:4px;
+  font:17px "Fira Code",monospace;
+  color:#77E6C5;
   overflow-wrap:anywhere;
 }
-.terminal-line.visible{
+
+/* PCB PRODUCTION */
+
+.production-scene{
+  height:100%;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.trays{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  min-height:110px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.tray{
+  width:80px;
+  height:80px;
+  border:2px solid #48687A;
+  background:#20394B;
+  border-radius:8px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+  padding:8px;
+  opacity:.2;
+  transform:translateY(-15px);
+  transition:opacity .5s,transform .5s;
+}
+.tray.active{
   opacity:1;
   transform:translateY(0);
 }
-
-/* Cockpit */
-.cockpit{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  padding:12px;
-}
-.instrument{
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  border:5px solid #3d4d63;
-  background:#091526;
+.mini-chip{
+  border:1px solid #71BAA3;
+  border-radius:3px;
+  background:#267A65;
   position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  box-shadow:inset 0 0 15px #000;
 }
-.instrument small{font-size:9px;color:#93b2cf}
-.instrument strong{
-  font:17px "Fira Code",monospace;
-  color:#70f4c5;
-}
-.needle{
+.mini-chip:after{
+  content:"";
   position:absolute;
-  left:50%;
-  top:50%;
-  width:3px;
-  height:35px;
-  background:#ffd071;
-  transform-origin:bottom center;
-  transform:translate(-50%,-100%) rotate(-90deg);
-  transition:transform 1.4s ease;
-}
-.instrument .needle~strong{
-  position:relative;
-  z-index:2;
-  background:#091526;
-  padding:2px 5px;
-  border-radius:4px;
+  inset:4px;
+  background:#122D39;
+  border-radius:2px;
 }
 
-/* Electrical circuit */
-.circuit{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg,transparent 49%,#ffffff0b 50%,transparent 51%),
-    linear-gradient(transparent 49%,#ffffff0b 50%,transparent 51%),
-    #122d39;
-  background-size:35px 35px;
+/* SIGNAL WAVE */
+
+.wave-scene{
+  height:100%;
+  padding:13px;
 }
-.circuit-line{
-  position:absolute;
-  left:17%;
-  right:17%;
-  top:50%;
-  height:4px;
-  background:#386879;
+.wave-svg{
+  width:100%;
+  height:145px;
+  background:#081727;
+  border:1px solid #35546C;
+  border-radius:9px;
 }
-.circuit-line.active{
-  background:#4df3c2;
-  box-shadow:0 0 15px #4df3c2;
+.wave-path{
+  fill:none;
+  stroke:#4DDEB3;
+  stroke-width:2.5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
-.chip{
-  position:absolute;
-  left:37%;
-  top:27%;
-  width:26%;
-  height:46%;
-  border:3px solid #7b8ea0;
-  background:#152236;
-  border-radius:8px;
+.wave-path.input{
+  stroke:#FFD071;
+  stroke-dasharray:5 5;
+  opacity:.7;
+}
+.wave-path.animate{
+  stroke-dasharray:1200;
+  stroke-dashoffset:1200;
+  animation:drawWave 1.6s linear forwards;
+}
+@keyframes drawWave{
+  to{stroke-dashoffset:0}
+}
+
+/* SENSOR COMPARISON */
+
+.sensor-scene{
+  height:100%;
+  padding:17px;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
-  color:#e4f2ff;
-  font-size:10px;
-  font-weight:800;
+}
+.sensor-pair{
+  display:flex;
+  gap:12px;
+}
+.sensor-card{
+  flex:1;
+  min-width:0;
+  border:1px solid #45657A;
+  border-radius:10px;
+  padding:12px 8px;
+  background:#0A1A2A;
   text-align:center;
 }
-.chip i{font-size:26px;margin-bottom:8px}
-.led{
-  position:absolute;
-  right:12%;
-  top:43%;
-  width:27px;
-  height:27px;
-  border-radius:50%;
-  background:#394d56;
-  border:3px solid #8aa1a8;
+.sensor-card i{
+  font-size:26px;
+  color:#8AB6D5;
 }
-.led.on{
-  background:#4df3c2;
-  box-shadow:0 0 25px #4df3c2,0 0 45px #4df3c277;
+.sensor-card small{
+  display:block;
+  color:#AAC5D9;
+  font-size:10px;
+  margin-top:6px;
 }
-.circuit-caption{
-  position:absolute;
-  bottom:10px;
-  left:10px;
-  right:10px;
-  font:11px "Fira Code",monospace;
-  color:white;
+.sensor-card strong{
+  display:block;
+  color:#FFD071;
+  font:20px "Fira Code",monospace;
+  margin-top:7px;
   overflow-wrap:anywhere;
 }
+.boolean-display{
+  margin-top:15px;
+  padding:11px;
+  border:1px solid #426175;
+  border-radius:9px;
+  text-align:center;
+  font:15px "Fira Code",monospace;
+  background:#091726;
+  transition:background .5s;
+}
+.boolean-display.true{
+  background:#134B3C;
+  color:#8DFFD9;
+}
+.boolean-display.false{
+  background:#573D23;
+  color:#FFD071;
+}
+
+/* COMPONENT WEIGHT */
+
+.scale-scene{
+  height:100%;
+  position:relative;
+  padding:14px;
+}
+.scale-base{
+  position:absolute;
+  width:100px;
+  height:12px;
+  background:#7893A9;
+  border-radius:6px;
+  left:50%;
+  bottom:35px;
+  transform:translateX(-50%);
+}
+.scale-pole{
+  position:absolute;
+  width:10px;
+  height:100px;
+  background:#7893A9;
+  left:50%;
+  bottom:45px;
+  transform:translateX(-50%);
+}
+.scale-beam{
+  position:absolute;
+  width:75%;
+  height:7px;
+  background:#A6BED1;
+  left:12.5%;
+  top:90px;
+  border-radius:5px;
+  transform-origin:center;
+  transition:transform 1.2s ease;
+}
+.scale-pan{
+  position:absolute;
+  top:5px;
+  width:95px;
+  text-align:center;
+}
+.scale-pan.left{left:-5px}
+.scale-pan.right{right:-5px}
+.scale-wire{
+  height:35px;
+  width:2px;
+  margin:auto;
+  background:#9DB5C9;
+}
+.scale-plate{
+  background:#224D60;
+  border-bottom:4px solid #9DB5C9;
+  border-radius:6px;
+  padding:9px 4px;
+}
+.scale-plate i{
+  color:#77E6C5;
+  font-size:21px;
+}
+.scale-plate strong{
+  display:block;
+  margin-top:4px;
+  font:12px "Fira Code",monospace;
+}
+.scale-caption{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:9px;
+  text-align:center;
+  font-size:11px;
+  color:#FFD071;
+}
+
+/* DIGITAL SIGNAL */
+
+.digital-scene{
+  padding:15px;
+  height:100%;
+}
+.signal-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+.signal-label{
+  width:65px;
+  font-size:10px;
+  color:#B1CDE1;
+}
+.bits{
+  display:flex;
+  gap:5px;
+  flex:1;
+}
+.bit{
+  flex:1;
+  padding:8px 0;
+  background:#ffffff10;
+  border:1px solid #38596F;
+  border-radius:5px;
+  text-align:center;
+  font:13px "Fira Code",monospace;
+  color:#7893A9;
+}
+.bit.on{
+  background:#205C4E;
+  color:#8DFFD9;
+  border-color:#4DDEB3;
+}
+
+/* LOGIC CIRCUITS */
+
+.logic-scene{
+  height:100%;
+  position:relative;
+  padding:18px;
+}
+.logic-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.logic-wire{
+  fill:none;
+  stroke:#426175;
+  stroke-width:3;
+  transition:stroke .4s;
+}
+.logic-wire.active{
+  stroke:#4DDEB3;
+  filter:drop-shadow(0 0 4px #4DDEB3);
+}
+.logic-input{
+  position:absolute;
+  left:5%;
+  width:25%;
+  background:#0A1A2A;
+  border:1px solid #426175;
+  border-radius:8px;
+  padding:8px 4px;
+  text-align:center;
+  font-size:9px;
+  color:#C1DBEB;
+}
+.logic-input.a{top:20%}
+.logic-input.b{top:60%}
+.logic-input strong{
+  display:block;
+  font:13px "Fira Code",monospace;
+  margin-top:5px;
+}
+.logic-input.on strong{color:#77E6C5}
+.logic-gate{
+  position:absolute;
+  left:40%;
+  top:35%;
+  width:22%;
+  height:30%;
+  display:grid;
+  place-items:center;
+  border:2px solid #8AB6D5;
+  border-radius:8px 40px 40px 8px;
+  background:#203E56;
+  color:#FFD071;
+  font:700 18px "Fira Code",monospace;
+}
+.logic-output{
+  position:absolute;
+  right:4%;
+  top:36%;
+  width:24%;
+  text-align:center;
+  font-size:9px;
+  color:#C1DBEB;
+}
+.logic-light{
+  width:30px;
+  height:30px;
+  margin:0 auto 8px;
+  border-radius:50%;
+  border:3px solid #7794A7;
+  background:#334D5D;
+  transition:all .5s;
+}
+.logic-light.on{
+  background:#4DDEB3;
+  box-shadow:0 0 22px #4DDEB3;
+}
+.logic-output strong{
+  display:block;
+  font:13px "Fira Code",monospace;
+  margin-top:5px;
+}
+
+/* VIRTUAL SATELLITE */
+
+.satellite-scene{
+  position:relative;
+  height:100%;
+  background:
+    radial-gradient(circle at 15% 20%,white 1px,transparent 2px),
+    radial-gradient(circle at 75% 15%,white 1px,transparent 2px),
+    radial-gradient(circle at 90% 65%,white 1px,transparent 2px),
+    radial-gradient(circle at 30% 85%,white 1px,transparent 2px),
+    #081526;
+}
+.planet{
+  position:absolute;
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  left:-50px;
+  bottom:-90px;
+  background:radial-gradient(circle at 60% 25%,#4E91BB,#183B68 65%,#081526);
+  box-shadow:0 0 30px #4E91BB55;
+}
+.satellite{
+  position:absolute;
+  left:13%;
+  top:22%;
+  width:125px;
+  height:70px;
+  display:flex;
+  align-items:center;
+  animation:float 4s ease-in-out infinite;
+}
+.solar{
+  flex:1;
+  height:42px;
+  border:2px solid #7FADD2;
+  background:
+    repeating-linear-gradient(
+      90deg,transparent 0 11px,#7FADD2 11px 12px
+    ),
+    repeating-linear-gradient(
+      0deg,#214D8A 0 12px,#7FADD2 12px 13px
+    );
+}
+.satellite-body{
+  width:43px;
+  height:60px;
+  background:#D8E5EF;
+  border:3px solid #7893A9;
+  border-radius:7px;
+  display:grid;
+  place-items:center;
+  color:#334D5D;
+}
+.packet{
+  position:absolute;
+  width:12px;
+  height:9px;
+  border-radius:3px;
+  background:#4DDEB3;
+  box-shadow:0 0 10px #4DDEB3;
+  top:42%;
+  left:42%;
+  opacity:0;
+}
+.packet.send{
+  animation:packetMove 1.2s ease-in-out forwards;
+}
+@keyframes packetMove{
+  0%{opacity:0;transform:translateX(0)}
+  20%{opacity:1}
+  90%{opacity:1}
+  100%{opacity:0;transform:translateX(75px)}
+}
+.satellite-monitor{
+  position:absolute;
+  top:12%;
+  right:5%;
+  width:42%;
+  background:#0C2234;
+  border:1px solid #43677E;
+  border-radius:10px;
+  padding:11px;
+}
+.sat-reading{
+  padding:8px 0;
+  border-bottom:1px solid #ffffff15;
+  font-size:9px;
+  color:#A6BED1;
+}
+.sat-reading strong{
+  display:block;
+  margin-top:4px;
+  color:#77E6C5;
+  font:14px "Fira Code",monospace;
+  overflow-wrap:anywhere;
+}
+
 @media(max-width:900px){
   .workspace{grid-template-columns:1fr}
   .stage{padding:20px}
 }
 @media(max-width:500px){
-  h1{font-size:30px}
+  h1{font-size:29px}
   .brand-name{font-size:13px}
+  .panel{padding:12px}
   .nav-info{display:none}
-  .panel{padding:13px}
-  .checklist{inset:10px 5%}
-  .cockpit{gap:5px}
-  .instrument{width:85px;height:85px}
-  .instrument strong{font-size:12px}
+  .scene{height:240px}
+  .input-grid{grid-template-columns:1fr}
+  .topline,.bottom{flex-wrap:wrap}
 }
 </style>
 </head>
 
 <body>
+
 <header>
   <div class="brand">
     <span class="logo">ALPHAGEN LEARNING</span>
-    <span class="brand-name">Aerospace Python Challenges</span>
+    <span class="brand-name">Aerospace Electronics Challenges</span>
   </div>
+
   <div class="progress">
-    <i class="fa-solid fa-star" style="color:#FFD071"></i>
-    Completed: <strong id="progress">0</strong> /
-    <span id="totalCount">10</span>
+    Completed: <strong id="progress">0</strong> / 10
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
   </div>
 </header>
 
 <main class="stage">
+
 <section id="intro" class="slide active center">
+
   <span class="tag">PYTHON × AEROSPACE ELECTRONICS</span>
-  <h1>Code the <span>Cockpit!</span></h1>
+
+  <h1>Engineering with <span>Python</span></h1>
+
   <p class="subtitle">
-    Ten Python missions inspired by aircraft electronics,
-    sensors, navigation and avionics. Write code and bring
-    simulated aircraft systems to life.
+    Solve ten engineering challenges using inputs,
+    calculations and Boolean expressions.
   </p>
-  <div style="font-size:70px;margin:24px 0;color:#5E48C4">
-    <i class="fa-solid fa-plane"></i>
+
+  <div class="hero">
+    <div class="hero-chip">
+      <i class="fa-solid fa-microchip"></i>
+    </div>
+    <div class="hero-node">+</div>
+    <div class="hero-node">==</div>
+    <div class="hero-node">%</div>
+    <div class="hero-node">&gt;</div>
+    <div class="hero-line"></div>
+    <div class="hero-line b"></div>
+    <div class="hero-line c"></div>
+    <div class="hero-line d"></div>
   </div>
+
+  <div class="categories">
+    <div class="category">Arithmetic Operators</div>
+    <div class="category">Comparison Operators</div>
+    <div class="category">Logical Operators</div>
+  </div>
+
   <button class="btn btn-yellow" onclick="start()">
-    Start Mission <i class="fa-solid fa-arrow-right"></i>
+    Start Challenges
+    <i class="fa-solid fa-arrow-right"></i>
   </button>
+
 </section>
 
 <section id="challenge" class="slide">
+
   <div class="topline">
     <span class="tag" id="counter"></span>
     <span class="tag" id="topic"></span>
   </div>
+
   <div class="workspace">
+
     <div class="panel">
+
       <h2 id="challengeTitle"></h2>
+
       <p class="task" id="task"></p>
-      <div class="panel-label">Your Program's Animation</div>
+
+      <div class="steps" id="steps"></div>
+
+      <div class="operator-row" id="operators"></div>
+
+      <div class="panel-label">Interactive Simulation</div>
+
       <div class="visual" id="visual"></div>
+
       <div class="actions">
         <button class="btn btn-light" onclick="replayAnimation()">
           <i class="fa-solid fa-rotate-right"></i>
           Replay Animation
         </button>
       </div>
-    </div>
-    <div class="panel">
-      <div class="panel-label">Write Your Python Code</div>
-      <textarea id="editor" class="code-editor"
-        spellcheck="false" autocomplete="off"></textarea>
 
-      <div class="input-area" id="inputArea">
+    </div>
+
+    <div class="panel">
+
+      <div class="panel-label">Write Your Python Code</div>
+
+      <textarea id="editor" class="code-editor"
+        spellcheck="false"
+        autocomplete="off"></textarea>
+
+      <div class="input-area">
+
         <div class="panel-label">Test Input</div>
+
         <div class="input-grid" id="inputGrid"></div>
+
+      </div>
+
+      <div class="expected-box">
+        <div class="panel-label">Expected Output</div>
+        <pre id="expectedOutput"></pre>
       </div>
 
       <div class="actions">
+
         <button class="btn btn-purple" id="runBtn"
           onclick="runCode()">
           <i class="fa-solid fa-play"></i> Run Code
         </button>
+
         <button class="btn btn-light" onclick="resetCode()">
           <i class="fa-solid fa-rotate-right"></i> Reset
         </button>
+
+        <button class="btn btn-light" onclick="copyCode()">
+          <i class="fa-solid fa-copy"></i> Copy Code
+        </button>
+
       </div>
+
       <div class="output" id="output">
         Output will appear here...
       </div>
+
       <div class="feedback" id="feedback"></div>
+
     </div>
+
   </div>
+
   <div class="bottom">
-    <span class="tag" id="missionHint"></span>
+
+    <span class="tag">No if / elif / else</span>
+
     <button class="btn btn-purple" id="nextChallenge"
       onclick="nextChallenge()" disabled>
       Next Challenge
     </button>
+
   </div>
+
 </section>
 
 <section id="finish" class="slide center">
-  <span class="tag">ALL MISSIONS COMPLETED</span>
-  <h1>Avionics <span>Coder!</span></h1>
+
+  <span class="tag">ENGINEERING CHALLENGES COMPLETED</span>
+
+  <h1>Python <span>Engineer!</span></h1>
+
+  <div style="font-size:65px;color:#5E48C4;margin:20px">
+    <i class="fa-solid fa-microchip"></i>
+  </div>
+
   <p class="subtitle">
-    You've built your first Python-powered aerospace
-    monitoring console.
+    You've used Python to process data, perform calculations
+    and build Boolean expressions.
   </p>
+
   <div class="finish-score">
     <div style="font-size:12px;font-weight:800">
-      MISSIONS COMPLETED
+      CHALLENGES COMPLETED
     </div>
     <strong id="finalCount">10 / 10</strong>
   </div>
+
   <button class="btn btn-yellow" onclick="restart()">
-    Restart Missions <i class="fa-solid fa-rotate-right"></i>
+    Restart Challenges
   </button>
+
 </section>
+
 </main>
 
 <div class="navigation">
+
   <button class="nav-btn" id="prevBtn"
     onclick="previous()" disabled>
     <i class="fa-solid fa-arrow-left"></i> Previous
   </button>
-  <span class="nav-info" id="navInfo">Aerospace Python</span>
+
+  <span class="nav-info" id="navInfo">
+    Aerospace Electronics
+  </span>
+
   <button class="nav-btn" id="navNext" onclick="forward()">
     Next <i class="fa-solid fa-arrow-right"></i>
   </button>
+
 </div>
 
 <script>
 "use strict";
-const $=id=>document.getElementById(id);
 
-const challenges=[
+const $ = id => document.getElementById(id);
+
+const field = (label,value,type="number") => ({
+  label,value:String(value),type
+});
+
+const bool = value => value ? "True" : "False";
+
+/* ==================================================
+   TEN NEW CODING CHALLENGES
+================================================== */
+
+const challenges = [
+
+/* CHALLENGE 1 */
+
 {
-  title:"Aircraft System Boot-Up",
-  topic:"print()",
-  hint:"Display system messages",
-  task:
-    "You are programming a simulated aircraft's start-up " +
-    "console. Display these three messages, each on its " +
-    "own line, in exactly this order: " +
-    "AVIONICS SYSTEM ONLINE / NAVIGATION SYSTEM READY / " +
-    "COMMUNICATION SYSTEM READY. Use three print() statements.",
-  starter:
-`# Aircraft System Boot-Up
-# Display three start-up messages
+  title:"Electronics Component Budget",
+  topic:"Arithmetic Operators",
+  description:
+    "An electronics lab is ordering components for a prototype. " +
+    "Create a program to calculate the total purchase cost.",
 
-`,
-  expected:
-`AVIONICS SYSTEM ONLINE
-NAVIGATION SYSTEM READY
-COMMUNICATION SYSTEM READY`,
-  inputs:[],
-  tests:[[]],
-  rule:"print3"
-},
-{
-  title:"Pre-Flight Checklist",
-  topic:"Triple-quoted strings",
-  hint:"Use triple quotes",
-  task:
-    "An engineer needs a readable pre-flight checklist. " +
-    "Using one print() statement with triple single quotes, " +
-    "display exactly these four lines: PRE-FLIGHT CHECKLIST / " +
-    "Battery: ON / Navigation: READY / Radio: READY.",
-  starter:
-`# Pre-Flight Checklist
-# Use print() with triple single quotes
+  steps:[
+    "Input the number of microchips and the price of each chip.",
+    "Input the number of sensors and the price of each sensor.",
+    "Calculate the chip cost and sensor cost.",
+    "Add both costs and display the complete budget."
+  ],
 
-`,
-  expected:
-`PRE-FLIGHT CHECKLIST
-Battery: ON
-Navigation: READY
-Radio: READY`,
-  inputs:[],
-  tests:[[]],
-  rule:"triple"
-},
-{
-  title:"Flight Sensor Report",
-  topic:"Escape character \\n",
-  hint:"Use \\n to create new lines",
-  task:
-    "A simulated aircraft sensor sends three readings. " +
-    "Using ONE print() statement and the \\n escape character, " +
-    "display exactly: SENSOR DATA / Altitude: 2500 ft / " +
-    "Speed: 180 knots / Temperature: 18 C. " +
-    "Each item must appear on a separate line.",
-  starter:
-`# Flight Sensor Report
-# Use one print() and \\n
+  operators:["*","+"],
+  required:["Mult","Add"],
 
-`,
-  expected:
-`SENSOR DATA
-Altitude: 2500 ft
-Speed: 180 knots
-Temperature: 18 C`,
-  inputs:[],
-  tests:[[]],
-  rule:"newline"
-},
-{
-  title:"Avionics Telemetry Dashboard",
-  topic:"Variables + print()",
-  hint:"Store readings in variables",
-  task:
-    "A simulated cockpit needs to display instrument readings. " +
-    "Create three variables named altitude, speed and voltage " +
-    "with values 2500, 180 and 28. Print each label together " +
-    "with its variable. Expected lines: Altitude: 2500 ft / " +
-    "Speed: 180 knots / Voltage: 28 V. " +
-    "Do not type the numbers directly into print().",
-  starter:
-`# Avionics Telemetry Dashboard
-
-# 1. Create altitude, speed and voltage variables
-
-# 2. Print each label with its variable
-
-`,
-  expected:
-`Altitude: 2500 ft
-Speed: 180 knots
-Voltage: 28 V`,
-  inputs:[],
-  tests:[[]],
-  rule:"variables"
-},
-{
-  title:"Aircraft Identification Terminal",
-  topic:"input() + variables",
-  hint:"Build an interactive flight console",
-  task:
-    "Build a simulated aircraft identification console. " +
-    "Ask the operator for an aircraft ID, altitude and speed " +
-    "using input(). Store all three values in variables. " +
-    "Then print exactly four lines: FLIGHT MONITOR / " +
-    "Aircraft: [ID] / Altitude: [value] ft / " +
-    "Speed: [value] knots. Your program must work with " +
-    "different inputs.",
-  starter:
-`# Aircraft Identification Terminal
-
-# 1. Ask for aircraft ID
-
-# 2. Ask for altitude
-
-# 3. Ask for speed
-
-# 4. Display the flight monitor report
-
-`,
   inputs:[
-    {label:"Aircraft ID",value:"AX-204"},
-    {label:"Altitude (ft)",value:"3500"},
-    {label:"Speed (knots)",value:"210"}
+    field("Microchip quantity",4,"integer"),
+    field("Price per microchip ($)",12.5),
+    field("Sensor quantity",6,"integer"),
+    field("Price per sensor ($)",8)
   ],
+
   tests:[
-    ["AX-204","3500","210"],
-    ["TP-101","1200","95"],
-    ["TEST-7","8000","260"]
+    ["4","12.5","6","8"],
+    ["2","15","3","7.5"],
+    ["10","4.25","5","2"]
   ],
-  expectedFor:v=>
-`FLIGHT MONITOR
-Aircraft: ${v[0]}
-Altitude: ${v[1]} ft
-Speed: ${v[2]} knots`,
-  rule:"input"
-},
-{
-  title:"Aircraft Maintenance Log",
-  topic:"Triple quotes + variables",
-  hint:"Create a maintenance report",
-  task:
-    "An aerospace technician is preparing a maintenance log. " +
-    "Create variables technician = 'Alex', aircraft = 'AX-204' " +
-    "and battery = 28. Use print() to display a report " +
-    "with exactly four lines: MAINTENANCE LOG / " +
-    "Technician: Alex / Aircraft: AX-204 / Battery: 28 V. " +
-    "Use a triple-quoted string for the heading and print " +
-    "the variable values rather than hardcoding them.",
+
   starter:
-`# Aircraft Maintenance Log
+`# Electronics Component Budget
 
-# 1. Store the technician's name
+# 1. Collect the four input values
 
-# 2. Store the aircraft ID
+# 2. Calculate microchip cost
 
-# 3. Store the battery voltage
+# 3. Calculate sensor cost
 
-# 4. Display the maintenance log
+# 4. Calculate total cost
+
+# 5. Display the results
 
 `,
-  expected:
-`MAINTENANCE LOG
-Technician: Alex
-Aircraft: AX-204
-Battery: 28 V`,
-  inputs:[],
-  tests:[[]],
-  rule:"maintenance"
-},
-{
-  title:"Navigation Coordinates Display",
-  topic:"input() + \\n",
-  hint:"Build a navigation display",
-  task:
-    "A navigation console receives latitude and longitude " +
-    "coordinates. Ask the operator to enter both values. " +
-    "Store them in variables. Using \\n, display exactly " +
-    "three lines: NAVIGATION DATA / Latitude: [value] / " +
-    "Longitude: [value]. Your program must work with " +
-    "different coordinates.",
-  starter:
-`# Navigation Coordinates Display
 
-# 1. Ask for latitude
+  expected:v=>{
+    const [q1,p1,q2,p2]=v.map(Number);
+    const chips=q1*p1;
+    const sensors=q2*p2;
 
-# 2. Ask for longitude
-
-# 3. Display the navigation data using \\n
-
-`,
-  inputs:[
-    {label:"Latitude",value:"1.3521"},
-    {label:"Longitude",value:"103.8198"}
-  ],
-  tests:[
-    ["1.3521","103.8198"],
-    ["51.4700","-0.4543"],
-    ["35.5494","139.7798"]
-  ],
-  expectedFor:v=>
-`NAVIGATION DATA
-Latitude: ${v[0]}
-Longitude: ${v[1]}`,
-  rule:"navigation"
-},
-{
-  title:"Aircraft Battery Monitor",
-  topic:"Variables + numeric input",
-  hint:"Read and display electrical measurements",
-  task:
-    "An aircraft electrical system uses a simulated 28 V " +
-    "power supply. Ask the operator for the measured voltage. " +
-    "Convert the input to a number using float(). " +
-    "Store the nominal voltage 28 in a separate variable. " +
-    "Calculate the difference using measured minus nominal. " +
-    "Print exactly three lines: BATTERY MONITOR / " +
-    "Measured: [value] V / Difference: [value] V. " +
-    "For example, 27.5 produces a difference of -0.5 V.",
-  starter:
-`# Aircraft Battery Monitor
-
-# 1. Store nominal voltage
-
-# 2. Ask for measured voltage
-
-# 3. Calculate the difference
-
-# 4. Display the battery report
-
-`,
-  inputs:[
-    {label:"Measured voltage (V)",value:"27.5"}
-  ],
-  tests:[
-    ["27.5"],["28"],["29.5"],["26"],
-    ["26.4"],["28.1"]
-  ],
-  expectedFor:v=>{
-    const measured=Number(v[0]);
-    const difference=Number((measured-28).toFixed(10));
-    return `BATTERY MONITOR
-Measured: ${measured} V
-Difference: ${difference} V`;
+    return [
+      ["Chip cost",chips],
+      ["Sensor cost",sensors],
+      ["Total cost",chips+sensors]
+    ];
   },
-  rule:"battery",
-  numericValidation:true
+
+  visual:"budget"
 },
+
+/* CHALLENGE 2 */
+
 {
-  title:"Flight Data Recorder",
-  topic:"Multiple inputs + formatted output",
-  hint:"Record simulated flight telemetry",
-  task:
-    "Build a basic flight data recorder. Ask for the " +
-    "aircraft ID, altitude, speed and heading. Store " +
-    "each response in a variable. Display exactly five " +
-    "lines: FLIGHT DATA RECORDER / Aircraft: [ID] / " +
-    "Altitude: [value] ft / Speed: [value] knots / " +
-    "Heading: [value] degrees. The program must work " +
-    "with different aircraft and flight readings.",
+  title:"Digital Memory Storage",
+  topic:"Multiplication and Division",
+  description:
+    "A virtual data logger stores a fixed number of bytes " +
+    "for every recorded sample.",
+
+  steps:[
+    "Input the number of samples.",
+    "Input the number of bytes stored per sample.",
+    "Multiply to calculate total bytes.",
+    "Divide total bytes by 1024 to calculate KiB."
+  ],
+
+  operators:["*","/"],
+  required:["Mult","Div"],
+
+  inputs:[
+    field("Number of samples",512,"integer"),
+    field("Bytes per sample",8,"integer")
+  ],
+
+  tests:[
+    ["512","8"],
+    ["100","4"],
+    ["1024","16"]
+  ],
+
   starter:
-`# Flight Data Recorder
+`# Digital Memory Storage
 
-# 1. Ask for aircraft ID
+# 1. Input number of samples
 
-# 2. Ask for altitude
+# 2. Input bytes per sample
 
-# 3. Ask for speed
+# 3. Calculate total bytes
 
-# 4. Ask for heading
+# 4. Convert bytes to KiB
 
-# 5. Display the complete flight report
+# 5. Display the results
 
 `,
-  inputs:[
-    {label:"Aircraft ID",value:"AX-204"},
-    {label:"Altitude (ft)",value:"4500"},
-    {label:"Speed (knots)",value:"220"},
-    {label:"Heading (degrees)",value:"90"}
-  ],
-  tests:[
-    ["AX-204","4500","220","90"],
-    ["TP-101","1200","95","180"],
-    ["TEST-7","8000","260","270"]
-  ],
-  expectedFor:v=>
-`FLIGHT DATA RECORDER
-Aircraft: ${v[0]}
-Altitude: ${v[1]} ft
-Speed: ${v[2]} knots
-Heading: ${v[3]} degrees`,
-  rule:"recorder"
+
+  expected:v=>{
+    const [samples,bytes]=v.map(Number);
+    const total=samples*bytes;
+
+    return [
+      ["Total bytes",total],
+      ["Storage KiB",total/1024]
+    ];
+  },
+
+  visual:"memory"
 },
+
+/* CHALLENGE 3 */
+
 {
-  title:"Aerospace Mission Control",
-  topic:"Final integrated challenge",
-  hint:"Combine everything you've learned",
-  task:
-    "Create a simulated aerospace mission control console. " +
-    "Ask for the aircraft ID, pilot name, altitude, speed " +
-    "and battery voltage. Store each value in a variable. " +
-    "Use a triple-quoted string to print the heading " +
-    "MISSION CONTROL. Display the five readings on separate " +
-    "lines, followed by SYSTEM REPORT COMPLETE. " +
-    "Your program must handle different input values.",
+  title:"Circuit Board Production",
+  topic:"Floor Division and Modulus",
+  description:
+    "A lab packs electronic components into trays. " +
+    "Each tray can hold a fixed number of components.",
+
+  steps:[
+    "Input the total number of components.",
+    "Input the capacity of one tray.",
+    "Use floor division to calculate the number of full trays.",
+    "Use modulus to calculate the leftover components."
+  ],
+
+  operators:["//","%"],
+  required:["FloorDiv","Mod"],
+
+  inputs:[
+    field("Total components",53,"integer"),
+    field("Components per tray",9,"positiveInteger")
+  ],
+
+  tests:[
+    ["53","9"],
+    ["36","9"],
+    ["22","5"],
+    ["4","9"]
+  ],
+
   starter:
-`# Aerospace Mission Control
-# Final Challenge
+`# Circuit Board Production
 
-# 1. Collect aircraft information
+# 1. Input total components
 
-# 2. Collect simulated sensor readings
+# 2. Input tray capacity
 
-# 3. Display the mission control heading
+# 3. Calculate full trays using //
 
-# 4. Display all recorded values
+# 4. Calculate leftovers using %
 
-# 5. Print the final system message
+# 5. Display both results
 
 `,
+
+  expected:v=>{
+    const [total,capacity]=v.map(Number);
+
+    return [
+      ["Full trays",Math.floor(total/capacity)],
+      ["Leftover components",total%capacity]
+    ];
+  },
+
+  visual:"production"
+},
+
+/* CHALLENGE 4 */
+
+{
+  title:"Virtual Signal Amplifier",
+  topic:"Multiplication and Exponentiation",
+  description:
+    "Experiment with a simulated digital signal. " +
+    "A mathematical gain increases the signal amplitude.",
+
+  steps:[
+    "Input the original signal amplitude.",
+    "Input the amplification factor.",
+    "Calculate output amplitude = amplitude × factor.",
+    "Calculate a squared signal value using output amplitude ** 2."
+  ],
+
+  operators:["*","**"],
+  required:["Mult","Pow"],
+
   inputs:[
-    {label:"Aircraft ID",value:"AX-204"},
-    {label:"Pilot",value:"Alex"},
-    {label:"Altitude (ft)",value:"5000"},
-    {label:"Speed (knots)",value:"230"},
-    {label:"Battery voltage (V)",value:"28"}
+    field("Original amplitude",3),
+    field("Amplification factor",4)
   ],
+
   tests:[
-    ["AX-204","Alex","5000","230","28"],
-    ["TP-101","Sam","1200","95","27.5"],
-    ["TEST-7","Jordan","8000","260","29"]
+    ["3","4"],
+    ["2.5","2"],
+    ["5","3"]
   ],
-  expectedFor:v=>
-`MISSION CONTROL
-Aircraft: ${v[0]}
-Pilot: ${v[1]}
-Altitude: ${v[2]} ft
-Speed: ${v[3]} knots
-Battery: ${v[4]} V
-SYSTEM REPORT COMPLETE`,
-  rule:"mission"
+
+  starter:
+`# Virtual Signal Amplifier
+
+# 1. Input the amplitude
+
+# 2. Input the amplification factor
+
+# 3. Calculate output amplitude
+
+# 4. Calculate squared signal value
+
+# 5. Display both results
+
+`,
+
+  expected:v=>{
+    const [amplitude,gain]=v.map(Number);
+    const output=amplitude*gain;
+
+    return [
+      ["Output amplitude",output],
+      ["Squared signal",output**2]
+    ];
+  },
+
+  visual:"wave"
+},
+
+/* CHALLENGE 5 */
+
+{
+  title:"Sensor Accuracy Tester",
+  topic:"Equality Operator",
+  description:
+    "Two simulated digital sensors are being compared. " +
+    "Check whether their recorded values are exactly equal.",
+
+  steps:[
+    "Input the reference sensor reading.",
+    "Input the test sensor reading.",
+    "Compare the readings using ==.",
+    "Print the Boolean result directly."
+  ],
+
+  operators:["=="],
+  required:["Eq"],
+
+  inputs:[
+    field("Reference reading",24),
+    field("Test sensor reading",24)
+  ],
+
+  tests:[
+    ["24","24"],
+    ["24","25"],
+    ["12.5","12.5"],
+    ["12.5","12.6"]
+  ],
+
+  starter:
+`# Sensor Accuracy Tester
+
+# 1. Input reference reading
+
+# 2. Input test sensor reading
+
+# 3. Compare both readings using ==
+
+# 4. Print the Boolean result
+
+`,
+
+  expected:v=>[
+    ["Readings match",Number(v[0])===Number(v[1])]
+  ],
+
+  visual:"sensor"
+},
+
+/* CHALLENGE 6 */
+
+{
+  title:"Component Weight Comparison",
+  topic:"Greater Than and Less Than",
+  description:
+    "An electronics designer is comparing the mass " +
+    "of two prototype circuit boards.",
+
+  steps:[
+    "Input the mass of Board A in grams.",
+    "Input the mass of Board B in grams.",
+    "Check whether Board A is lighter than Board B.",
+    "Check whether Board A is heavier than Board B."
+  ],
+
+  operators:["<",">"],
+  required:["Lt","Gt"],
+
+  inputs:[
+    field("Board A mass (g)",120),
+    field("Board B mass (g)",175)
+  ],
+
+  tests:[
+    ["120","175"],
+    ["200","150"],
+    ["100","100"],
+    ["12.5","13.5"]
+  ],
+
+  starter:
+`# Component Weight Comparison
+
+# 1. Input Board A mass
+
+# 2. Input Board B mass
+
+# 3. Check whether A is lighter
+
+# 4. Check whether A is heavier
+
+# 5. Display both Boolean results
+
+`,
+
+  expected:v=>{
+    const [a,b]=v.map(Number);
+
+    return [
+      ["A is lighter",a<b],
+      ["A is heavier",a>b]
+    ];
+  },
+
+  visual:"scale"
+},
+
+/* CHALLENGE 7 */
+
+{
+  title:"Digital Signal Comparator",
+  topic:"Not Equal and Greater Than or Equal",
+  description:
+    "Compare two 8-bit digital readings from a virtual " +
+    "electronics test bench.",
+
+  steps:[
+    "Input Signal A and Signal B (integers from 0 to 255).",
+    "Check whether the two signals are different using !=.",
+    "Check whether Signal A is greater than or equal to Signal B.",
+    "Display both Boolean results."
+  ],
+
+  operators:["!=",">="],
+  required:["NotEq","GtE"],
+
+  inputs:[
+    field("Signal A",160,"byte"),
+    field("Signal B",128,"byte")
+  ],
+
+  tests:[
+    ["160","128"],
+    ["128","128"],
+    ["64","128"],
+    ["255","0"]
+  ],
+
+  starter:
+`# Digital Signal Comparator
+
+# 1. Input Signal A
+
+# 2. Input Signal B
+
+# 3. Check whether signals are different
+
+# 4. Check whether A is greater than
+#    or equal to B
+
+# 5. Display both results
+
+`,
+
+  expected:v=>{
+    const [a,b]=v.map(Number);
+
+    return [
+      ["Signals differ",a!==b],
+      ["A at least B",a>=b]
+    ];
+  },
+
+  visual:"digital"
+},
+
+/* CHALLENGE 8 */
+
+{
+  title:"Electronics Lab Access",
+  topic:"Logical AND",
+  description:
+    "A fictional virtual lab activity requires both a " +
+    "completed training module and a valid student ID.",
+
+  steps:[
+    "Input training status (yes or no).",
+    "Input student ID status (yes or no).",
+    "Compare each input with the string 'yes'.",
+    "Combine the two comparisons using and.",
+    "Print the final Boolean result."
+  ],
+
+  operators:["==","and"],
+  required:["Eq","And"],
+
+  inputs:[
+    field("Training completed?", "yes","yesno"),
+    field("Student ID valid?", "yes","yesno")
+  ],
+
+  tests:[
+    ["yes","yes"],
+    ["yes","no"],
+    ["no","yes"],
+    ["no","no"]
+  ],
+
+  starter:
+`# Electronics Lab Access
+
+# 1. Input training status
+
+# 2. Input student ID status
+
+# 3. Compare both values with "yes"
+
+# 4. Combine comparisons using and
+
+# 5. Print the Boolean result
+
+`,
+
+  expected:v=>[
+    ["Access granted",v[0]==="yes" && v[1]==="yes"]
+  ],
+
+  visual:"and"
+},
+
+/* CHALLENGE 9 */
+
+{
+  title:"Communication Channel Simulator",
+  topic:"Logical OR and NOT",
+  description:
+    "A virtual communication experiment has two simulated " +
+    "data channels. Determine whether any channel is available.",
+
+  steps:[
+    "Input Channel A status (online or offline).",
+    "Input Channel B status (online or offline).",
+    "Use or to check whether at least one channel is online.",
+    "Use not to check whether neither channel is online.",
+    "Display both Boolean results."
+  ],
+
+  operators:["==","or","not"],
+  required:["Eq","Or","Not"],
+
+  inputs:[
+    field("Channel A","online","channel"),
+    field("Channel B","offline","channel")
+  ],
+
+  tests:[
+    ["online","offline"],
+    ["offline","online"],
+    ["online","online"],
+    ["offline","offline"]
+  ],
+
+  starter:
+`# Communication Channel Simulator
+
+# 1. Input Channel A status
+
+# 2. Input Channel B status
+
+# 3. Check whether any channel is online
+
+# 4. Use not to check whether
+#    neither channel is online
+
+# 5. Display both Boolean results
+
+`,
+
+  expected:v=>{
+    const available=
+      v[0]==="online" || v[1]==="online";
+
+    return [
+      ["Channel available",available],
+      ["No channels online",!available]
+    ];
+  },
+
+  visual:"or"
+},
+
+/* CHALLENGE 10 */
+
+{
+  title:"Virtual Satellite Data Laboratory",
+  topic:"Combined Operators",
+  description:
+    "Build a data-processing program for a fictional " +
+    "satellite simulation. Analyse its generated data " +
+    "and virtual storage capacity.",
+
+  steps:[
+    "Input the number of data packets and bytes per packet.",
+    "Input the available storage capacity in bytes.",
+    "Input connection status (online or offline).",
+    "Calculate total data using multiplication.",
+    "Calculate remaining storage using subtraction.",
+    "Use <= to check whether the data fits in storage.",
+    "Use and to check whether the data fits and the connection is online."
+  ],
+
+  operators:["*","-","<=","==","and"],
+  required:["Mult","Sub","LtE","Eq","And"],
+
+  inputs:[
+    field("Data packets",20,"integer"),
+    field("Bytes per packet",64,"integer"),
+    field("Storage capacity (bytes)",2048,"integer"),
+    field("Connection status","online","channel")
+  ],
+
+  tests:[
+    ["20","64","2048","online"],
+    ["40","64","2048","online"],
+    ["10","64","2048","offline"],
+    ["32","64","2048","online"]
+  ],
+
+  starter:
+`# Virtual Satellite Data Laboratory
+
+# 1. Input packet count
+
+# 2. Input bytes per packet
+
+# 3. Input storage capacity
+
+# 4. Input connection status
+
+# 5. Calculate total data
+
+# 6. Calculate remaining storage
+
+# 7. Check whether the data fits
+
+# 8. Combine the storage comparison
+#    and connection comparison
+
+# 9. Display all four results
+
+`,
+
+  expected:v=>{
+    const packets=Number(v[0]);
+    const bytes=Number(v[1]);
+    const capacity=Number(v[2]);
+
+    const total=packets*bytes;
+    const remaining=capacity-total;
+    const fits=total<=capacity;
+
+    return [
+      ["Total data",total],
+      ["Remaining storage",remaining],
+      ["Data fits",fits],
+      ["Transfer ready",fits && v[3]==="online"]
+    ];
+  },
+
+  visual:"satellite"
 }
+
 ];
+
+/* ==================================================
+   STATE AND NAVIGATION
+================================================== */
 
 let current=-1;
 let completed=new Set();
 let savedCode={};
+let savedInputs={};
 let lastRun={};
 let running=false;
-let worker=null;
-let requests=new Map();
-let requestId=0;
 let timers=[];
 let animationToken=0;
 
-$("totalCount").textContent=challenges.length;
-
 function schedule(fn,delay){
   const token=animationToken;
+
   const id=setTimeout(()=>{
     if(token===animationToken)fn();
   },delay);
+
   timers.push(id);
 }
+
 function clearAnimation(){
   animationToken++;
   timers.forEach(clearTimeout);
   timers=[];
 }
+
 function show(id){
   document.querySelectorAll(".slide").forEach(el=>{
     el.classList.remove("active");
   });
+
   $(id).classList.add("active");
   updateNav();
 }
+
 function start(){
   current=0;
   render();
 }
-function note(text){
-  const el=$("sceneNote");
-  if(el)el.textContent=text;
-}
-function result(text){
-  const el=$("sceneResult");
-  if(el)el.textContent=text;
-}
-function sceneTemplate(title,scene){
-  return `
-    <div class="scene-title">${title}</div>
-    <div class="scene">${scene}</div>
-    <div class="scene-note" id="sceneNote">
-      Run your Python code to activate the simulation.
-    </div>
-    <div class="result">
-      <small>YOUR PROGRAM'S OUTPUT</small>
-      <strong id="sceneResult">Waiting...</strong>
-    </div>
-  `;
-}
-function terminalMarkup(title){
-  return `
-    <div class="terminal">
-      <div class="terminal-title">${title}</div>
-      <div id="terminalLines"></div>
-    </div>
-  `;
+
+function saveCurrent(){
+  if(current>=0 && current<challenges.length){
+    savedCode[current]=$("editor").value;
+    savedInputs[current]=getValues();
+  }
 }
 
-function buildVisual(){
-  const visual=$("visual");
+function nextChallenge(){
+  if(running || current<0 || !completed.has(current))return;
 
-  if(current===0||current===9){
-    visual.innerHTML=sceneTemplate(
-      current===0
-        ?"AIRCRAFT START-UP SEQUENCE"
-        :"MISSION CONTROL",
-      `<div class="sky">
-        <div class="cloud one"></div>
-        <div class="cloud two"></div>
-        <div class="flight-label" id="flightLabel">
-          ${current===0?"SYSTEMS OFFLINE":"MISSION CONTROL STANDBY"}
-        </div>
-        <i class="fa-solid fa-plane plane" id="plane"></i>
-        <div class="runway"></div>
-      </div>`
-    );
+  saveCurrent();
+  current++;
+  render();
+}
+
+function previous(){
+  if(running || current<0)return;
+
+  saveCurrent();
+  current--;
+  render();
+}
+
+function forward(){
+  if(running)return;
+
+  if(current===-1){
+    start();
+    return;
   }
 
-  if(current===1){
-    visual.innerHTML=sceneTemplate(
-      "ENGINEERING CHECKLIST",
-      `<div class="checklist">
-        <h3>
-          <i class="fa-solid fa-clipboard-check"></i>
-          PRE-FLIGHT CHECKLIST
-        </h3>
-        <div class="checkrow" id="check0">
-          Battery <i class="fa-solid fa-circle-check"></i>
-        </div>
-        <div class="checkrow" id="check1">
-          Navigation <i class="fa-solid fa-circle-check"></i>
-        </div>
-        <div class="checkrow" id="check2">
-          Radio <i class="fa-solid fa-circle-check"></i>
-        </div>
-      </div>`
-    );
+  if(current<challenges.length){
+    nextChallenge();
+  }
+}
+
+function updateNav(){
+  $("progress").textContent=completed.size;
+
+  $("progressFill").style.width=
+    `${completed.size/challenges.length*100}%`;
+
+  $("prevBtn").disabled=running || current<0;
+
+  $("navNext").disabled=
+    running ||
+    current>=challenges.length ||
+    (current>=0 && !completed.has(current));
+
+  $("navInfo").textContent=
+    current<0
+      ?"Aerospace Electronics"
+      :current>=challenges.length
+        ?"Completed"
+        :`Challenge ${current+1} / ${challenges.length}`;
+}
+
+function showFinish(){
+  clearAnimation();
+
+  current=challenges.length;
+
+  $("finalCount").textContent=
+    `${completed.size} / ${challenges.length}`;
+
+  show("finish");
+  celebrate(180);
+}
+
+function restart(){
+  if(running)return;
+
+  clearAnimation();
+
+  current=-1;
+  completed.clear();
+  savedCode={};
+  savedInputs={};
+  lastRun={};
+
+  show("intro");
+}
+
+/* ==================================================
+   INPUTS AND EXPECTED OUTPUT
+================================================== */
+
+function formatValue(value){
+  if(typeof value==="boolean"){
+    return bool(value);
   }
 
-  if([2,5,6,8].includes(current)){
-    const titles={
-      2:"SENSOR DATA TERMINAL",
-      5:"AIRCRAFT MAINTENANCE TERMINAL",
-      6:"NAVIGATION COORDINATES",
-      8:"FLIGHT DATA RECORDER"
-    };
-    const terminalTitles={
-      2:"SENSOR TELEMETRY / SIMULATION",
-      5:"MAINTENANCE RECORD / SIMULATION",
-      6:"GPS COORDINATE DISPLAY",
-      8:"FLIGHT RECORDER / TELEMETRY"
-    };
-    visual.innerHTML=sceneTemplate(
-      titles[current],terminalMarkup(terminalTitles[current])
-    );
+  if(typeof value==="number"){
+    return String(Number(value.toPrecision(12)));
   }
 
-  if(current===3){
-    visual.innerHTML=sceneTemplate(
-      "COCKPIT INSTRUMENT DISPLAY",
-      `<div class="cockpit">
-        <div class="instrument">
-          <div class="needle" id="needleAlt"></div>
-          <small>ALTITUDE</small>
-          <strong id="dialAlt">---</strong>
-          <small>ft</small>
-        </div>
-        <div class="instrument">
-          <div class="needle" id="needleSpeed"></div>
-          <small>AIRSPEED</small>
-          <strong id="dialSpeed">---</strong>
-          <small>knots</small>
-        </div>
-        <div class="instrument">
-          <div class="needle" id="needleVolt"></div>
-          <small>VOLTAGE</small>
-          <strong id="dialVolt">---</strong>
-          <small>V</small>
-        </div>
-      </div>`
-    );
+  return String(value);
+}
+
+function expectedText(c,values){
+  return c.expected(values)
+    .map(([label,value])=>{
+      return `${label}: ${formatValue(value)}`;
+    }).join("\n");
+}
+
+function getValues(){
+  return challenges[current].inputs.map(
+    (_,i)=>$("userInput"+i).value.trim()
+  );
+}
+
+function validateInputs(c,values){
+  for(let i=0;i<c.inputs.length;i++){
+    const item=c.inputs[i];
+    const value=values[i];
+
+    if(value===""){
+      return "Complete all input fields.";
+    }
+
+    if(item.type==="yesno"){
+      if(!["yes","no"].includes(value)){
+        return item.label+" Enter yes or no.";
+      }
+      continue;
+    }
+
+    if(item.type==="channel"){
+      if(!["online","offline"].includes(value)){
+        return item.label+": Enter online or offline.";
+      }
+      continue;
+    }
+
+    const number=Number(value);
+
+    if(!/^[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i.test(value)
+       || !Number.isFinite(number)){
+      return item.label+": Enter a valid number.";
+    }
+
+    if(number<0){
+      return item.label+": Enter a non-negative value.";
+    }
+
+    if(["integer","positiveInteger","byte"].includes(item.type)
+       && !Number.isInteger(number)){
+      return item.label+": Enter a whole number.";
+    }
+
+    if(item.type==="positiveInteger" && number<=0){
+      return item.label+": Enter a number greater than zero.";
+    }
+
+    if(item.type==="byte" && number>255){
+      return item.label+": Enter a number from 0 to 255.";
+    }
   }
 
-  if(current===4||current===7){
-    const isBattery=current===7;
-    visual.innerHTML=sceneTemplate(
-      isBattery
-        ?"AIRCRAFT ELECTRICAL SYSTEM"
-        :"AIRCRAFT IDENTIFICATION CONSOLE",
-      `<div class="circuit">
-        <div class="circuit-line" id="circuitLine"></div>
-        <div class="chip">
-          <i class="fa-solid ${isBattery?"fa-bolt":"fa-microchip"}"></i>
-          ${isBattery?"POWER MONITOR":"FLIGHT DATA"}
-        </div>
-        <div class="led" id="led"></div>
-        <div class="circuit-caption" id="circuitCaption">
-          ${isBattery?"AWAITING VOLTAGE READING":"AWAITING INPUT"}
-        </div>
-      </div>`
-    );
-  }
+  return null;
+}
+
+function updateExpected(){
+  const c=challenges[current];
+  const values=getValues();
+  const error=validateInputs(c,values);
+
+  $("expectedOutput").textContent=
+    error ? error : expectedText(c,values);
 }
 
 function renderInputs(){
   const grid=$("inputGrid");
   const items=challenges[current].inputs;
+
   grid.replaceChildren();
-  $("inputArea").style.display=items.length?"block":"none";
 
   items.forEach((item,i)=>{
     const wrap=document.createElement("div");
     wrap.className="input-field";
+
     const label=document.createElement("label");
     label.htmlFor="userInput"+i;
     label.textContent=item.label;
+
     const input=document.createElement("input");
+
     input.id="userInput"+i;
     input.type="text";
-    input.value=item.value;
+
+    input.value=
+      savedInputs[current]?.[i] ?? item.value;
+
+    if(!["yesno","channel"].includes(item.type)){
+      input.inputMode="decimal";
+    }
+
+    input.addEventListener("input",updateExpected);
+
     wrap.append(label,input);
     grid.append(wrap);
   });
+
+  updateExpected();
 }
-function getValues(){
-  return challenges[current].inputs.map(
-    (_,i)=>$("userInput"+i).value
-  );
-}
+
 function render(){
   clearAnimation();
 
@@ -1198,657 +2118,1433 @@ function render(){
     show("intro");
     return;
   }
+
   if(current>=challenges.length){
     showFinish();
     return;
   }
 
   const c=challenges[current];
+
   $("counter").textContent=
     `Challenge ${current+1} of ${challenges.length}`;
+
   $("topic").textContent=c.topic;
   $("challengeTitle").textContent=c.title;
-  $("task").textContent=c.task;
-  $("missionHint").textContent=c.hint;
+  $("task").textContent=c.description;
+
+  $("steps").replaceChildren();
+
+  c.steps.forEach((text,i)=>{
+    const row=document.createElement("div");
+    row.className="step";
+
+    const number=document.createElement("span");
+    number.className="step-number";
+    number.textContent=i+1;
+
+    const content=document.createElement("span");
+    content.textContent=text;
+
+    row.append(number,content);
+    $("steps").append(row);
+  });
+
+  $("operators").replaceChildren();
+
+  c.operators.forEach(op=>{
+    const span=document.createElement("span");
+    span.className="operator";
+    span.textContent=op;
+    $("operators").append(span);
+  });
+
   $("editor").value=savedCode[current]??c.starter;
-  $("output").textContent="Output will appear here...";
+
+  $("output").textContent=
+    lastRun[current]?.output || "Output will appear here...";
+
   $("feedback").textContent="";
   $("feedback").className="feedback";
+
   $("nextChallenge").disabled=!completed.has(current);
+
   $("nextChallenge").textContent=
     current===challenges.length-1
-      ?"Finish Challenges":"Next Challenge";
+      ?"Finish Challenges"
+      :"Next Challenge";
 
   renderInputs();
   show("challenge");
   buildVisual();
+
+  if(lastRun[current]?.passed){
+    showFeedback("Challenge completed.",true);
+  }
 }
+
 function resetCode(){
-  if(running||current<0||current>=challenges.length)return;
+  if(running)return;
+
   $("editor").value=challenges[current].starter;
   savedCode[current]=$("editor").value;
+
   delete lastRun[current];
+
   $("output").textContent="Output will appear here...";
   $("feedback").textContent="";
   $("feedback").className="feedback";
+
   clearAnimation();
   buildVisual();
 }
 
-function animateTerminal(lines){
-  const box=$("terminalLines");
-  if(!box)return;
-  lines.forEach((line,i)=>{
-    schedule(()=>{
-      const el=document.createElement("div");
-      el.className="terminal-line";
-      el.textContent="> "+line;
-      box.append(el);
-      requestAnimationFrame(()=>el.classList.add("visible"));
-    },350+i*450);
+async function copyCode(){
+  try{
+    await navigator.clipboard.writeText($("editor").value);
+    showFeedback("Code copied.",true);
+  }catch{
+    $("editor").focus();
+    $("editor").select();
+
+    showFeedback("Press Ctrl+C or Cmd+C to copy your code.",true);
+  }
+}
+
+/* ==================================================
+   VISUAL BUILDERS
+================================================== */
+
+function sceneTemplate(title,markup){
+  return `
+    <div class="scene-title">${title}</div>
+    <div class="scene">${markup}</div>
+    <div class="scene-note" id="sceneNote">
+      Run your Python code to activate the simulation.
+    </div>
+  `;
+}
+
+function reading(label,id){
+  return `
+    <div class="reading">
+      <small>${label}</small>
+      <strong id="${id}">---</strong>
+    </div>
+  `;
+}
+
+function note(text){
+  const el=$("sceneNote");
+  if(el)el.textContent=text;
+}
+
+function setText(id,value){
+  const el=$(id);
+  if(el)el.textContent=formatValue(value);
+}
+
+function buildVisual(){
+  const type=challenges[current].visual;
+  let markup="";
+  let title="";
+
+  if(type==="budget"){
+    title="ELECTRONICS PURCHASE CONSOLE";
+
+    markup=`
+      <div class="budget-scene">
+
+        <div class="component-row">
+          <div class="component-icon">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+
+          <div class="component-info">
+            MICROCHIPS
+            <div class="cost-track">
+              <div class="cost-fill" id="chipBar"></div>
+            </div>
+          </div>
+
+          <span class="component-value" id="chipCost">---</span>
+        </div>
+
+        <div class="component-row">
+          <div class="component-icon">
+            <i class="fa-solid fa-wave-square"></i>
+          </div>
+
+          <div class="component-info">
+            SENSORS
+            <div class="cost-track">
+              <div class="cost-fill" id="sensorBar"></div>
+            </div>
+          </div>
+
+          <span class="component-value" id="sensorCost">---</span>
+        </div>
+
+        <div class="total-display">
+          TOTAL PURCHASE COST
+          <strong id="totalCost">---</strong>
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="memory"){
+    title="VIRTUAL MEMORY MODULE";
+
+    markup=`
+      <div class="memory-scene">
+
+        <div class="memory-chip">
+          <div class="memory-heading">
+            <span>DATA STORAGE</span>
+            <i class="fa-solid fa-memory"></i>
+          </div>
+
+          <div class="memory-grid">
+            ${Array.from({length:36},(_,i)=>
+              `<div class="memory-cell" id="mem${i}"></div>`
+            ).join("")}
+          </div>
+        </div>
+
+        <div class="reading-grid">
+          ${reading("TOTAL BYTES","totalBytes")}
+          ${reading("STORAGE KiB","storageKib")}
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="production"){
+    title="COMPONENT PACKING SIMULATION";
+
+    markup=`
+      <div class="production-scene">
+
+        <div class="trays">
+          ${Array.from({length:3},(_,i)=>`
+            <div class="tray" id="tray${i}">
+              ${Array.from({length:9},()=>
+                `<div class="mini-chip"></div>`
+              ).join("")}
+            </div>
+          `).join("")}
+        </div>
+
+        <div class="reading-grid">
+          ${reading("FULL TRAYS","fullTrays")}
+          ${reading("LEFTOVER COMPONENTS","leftovers")}
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="wave"){
+    title="DIGITAL SIGNAL VISUALISER";
+
+    markup=`
+      <div class="wave-scene">
+
+        <svg class="wave-svg" viewBox="0 0 400 145">
+
+          ${Array.from({length:9},(_,i)=>`
+            <line x1="${i*50}" y1="0"
+              x2="${i*50}" y2="145"
+              stroke="#ffffff10"/>
+          `).join("")}
+
+          ${Array.from({length:6},(_,i)=>`
+            <line x1="0" y1="${i*29}"
+              x2="400" y2="${i*29}"
+              stroke="#ffffff10"/>
+          `).join("")}
+
+          <line x1="0" y1="72.5"
+            x2="400" y2="72.5"
+            stroke="#526E82"/>
+
+          <path id="inputWave"
+            class="wave-path input" d=""/>
+
+          <path id="outputWave"
+            class="wave-path" d=""/>
+
+        </svg>
+
+        <div class="reading-grid">
+          ${reading("OUTPUT AMPLITUDE","amplitude")}
+          ${reading("SQUARED SIGNAL","squared")}
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="sensor"){
+    title="DIGITAL SENSOR COMPARISON";
+
+    markup=`
+      <div class="sensor-scene">
+
+        <div class="sensor-pair">
+
+          <div class="sensor-card">
+            <i class="fa-solid fa-gauge-high"></i>
+            <small>REFERENCE SENSOR</small>
+            <strong id="referenceValue">---</strong>
+          </div>
+
+          <div class="sensor-card">
+            <i class="fa-solid fa-gauge-high"></i>
+            <small>TEST SENSOR</small>
+            <strong id="testValue">---</strong>
+          </div>
+
+        </div>
+
+        <div class="boolean-display" id="sensorResult">
+          Awaiting comparison
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="scale"){
+    title="VIRTUAL COMPONENT WEIGHING SCALE";
+
+    markup=`
+      <div class="scale-scene">
+
+        <div class="scale-base"></div>
+        <div class="scale-pole"></div>
+
+        <div class="scale-beam" id="scaleBeam">
+
+          <div class="scale-pan left">
+            <div class="scale-wire"></div>
+            <div class="scale-plate">
+              <i class="fa-solid fa-microchip"></i>
+              <strong id="massA">A: ---</strong>
+            </div>
+          </div>
+
+          <div class="scale-pan right">
+            <div class="scale-wire"></div>
+            <div class="scale-plate">
+              <i class="fa-solid fa-microchip"></i>
+              <strong id="massB">B: ---</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="scale-caption" id="scaleCaption">
+          Awaiting comparison
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="digital"){
+    title="8-BIT SIGNAL TEST BENCH";
+
+    markup=`
+      <div class="digital-scene">
+
+        <div class="signal-row">
+          <div class="signal-label">SIGNAL A</div>
+          <div class="bits" id="bitsA"></div>
+        </div>
+
+        <div class="signal-row">
+          <div class="signal-label">SIGNAL B</div>
+          <div class="bits" id="bitsB"></div>
+        </div>
+
+        <div class="reading-grid">
+          ${reading("SIGNALS DIFFER","signalsDiffer")}
+          ${reading("A ≥ B","signalCompare")}
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="and" || type==="or"){
+    const isAnd=type==="and";
+
+    title=isAnd
+      ?"VIRTUAL AND LOGIC CIRCUIT"
+      :"VIRTUAL OR LOGIC CIRCUIT";
+
+    markup=`
+      <div class="logic-scene">
+
+        <svg class="logic-svg"
+          viewBox="0 0 400 240"
+          preserveAspectRatio="none">
+
+          <path id="wireA" class="logic-wire"
+            d="M120 76 H145 V105 H170"/>
+
+          <path id="wireB" class="logic-wire"
+            d="M120 170 H145 V135 H170"/>
+
+          <path id="wireOut" class="logic-wire"
+            d="M245 120 H335"/>
+
+        </svg>
+
+        <div class="logic-input a" id="logicA">
+          ${isAnd?"TRAINING":"CHANNEL A"}
+          <strong id="logicValueA">---</strong>
+        </div>
+
+        <div class="logic-input b" id="logicB">
+          ${isAnd?"STUDENT ID":"CHANNEL B"}
+          <strong id="logicValueB">---</strong>
+        </div>
+
+        <div class="logic-gate">
+          ${isAnd?"AND":"OR"}
+        </div>
+
+        <div class="logic-output">
+          <div class="logic-light" id="logicLight"></div>
+          ${isAnd?"ACCESS":"AVAILABLE"}
+          <strong id="logicResult">---</strong>
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="satellite"){
+    title="VIRTUAL SATELLITE DATA CONSOLE";
+
+    markup=`
+      <div class="satellite-scene">
+
+        <div class="planet"></div>
+
+        <div class="satellite">
+          <div class="solar"></div>
+          <div class="satellite-body">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <div class="solar"></div>
+        </div>
+
+        ${Array.from({length:5},(_,i)=>
+          `<div class="packet" id="packet${i}"></div>`
+        ).join("")}
+
+        <div class="satellite-monitor">
+
+          <div class="sat-reading">
+            TOTAL DATA
+            <strong id="satData">---</strong>
+          </div>
+
+          <div class="sat-reading">
+            REMAINING STORAGE
+            <strong id="satStorage">---</strong>
+          </div>
+
+          <div class="sat-reading">
+            DATA FITS
+            <strong id="satFits">---</strong>
+          </div>
+
+          <div class="sat-reading">
+            TRANSFER READY
+            <strong id="satReady">---</strong>
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  $("visual").innerHTML=sceneTemplate(title,markup);
+
+  if(type==="digital"){
+    renderBits("bitsA",null);
+    renderBits("bitsB",null);
+  }
+}
+
+/* ==================================================
+   ANIMATION HELPERS
+================================================== */
+
+function animateNumber(id,target,prefix="",suffix=""){
+  const el=$(id);
+
+  if(!el || !Number.isFinite(target))return;
+
+  const token=animationToken;
+  const duration=850;
+  const start=performance.now();
+
+  function frame(now){
+    if(token!==animationToken)return;
+
+    const progress=Math.min((now-start)/duration,1);
+    const eased=1-Math.pow(1-progress,3);
+    const value=target*eased;
+
+    el.textContent=
+      prefix+formatValue(
+        Number(value.toFixed(2))
+      )+suffix;
+
+    if(progress<1){
+      requestAnimationFrame(frame);
+    }else{
+      el.textContent=prefix+formatValue(target)+suffix;
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+function wavePath(amplitude,scale){
+  let d="";
+
+  for(let x=0;x<=400;x+=2){
+    const y=72.5-
+      Math.sin(x/400*Math.PI*6)*amplitude*scale;
+
+    d+=(x===0?"M":"L")+x+" "+y+" ";
+  }
+
+  return d;
+}
+
+function renderBits(id,value){
+  const container=$(id);
+  container.replaceChildren();
+
+  const binary=value===null
+    ?"--------"
+    :Number(value).toString(2).padStart(8,"0");
+
+  binary.split("").forEach((bit,i)=>{
+    const el=document.createElement("div");
+
+    el.className="bit";
+    el.textContent=bit;
+
+    container.append(el);
+
+    if(bit==="1"){
+      schedule(()=>el.classList.add("on"),i*90);
+    }
   });
 }
+
+function setBoolean(id,value,label=""){
+  const el=$(id);
+  if(!el)return;
+
+  el.textContent=label+bool(value);
+  el.classList.remove("true","false");
+  el.classList.add(value?"true":"false");
+}
+
+/* ==================================================
+   OUTPUT-DRIVEN ANIMATIONS
+================================================== */
+
 function animateExecution(record){
   clearAnimation();
   buildVisual();
 
   if(!record){
-    note("Run your code first.");
-    return;
-  }
-  if(record.error){
-    result("Python error");
-    note("Check the error shown in the output panel.");
+    note("Run your Python code first.");
     return;
   }
 
-  const lines=record.output.replace(/\r\n/g,"\n")
-    .trimEnd().split("\n");
-  const index=current;
+  if(!record.passed){
+    note("Check your program's output before activating the simulation.");
+    return;
+  }
 
-  if(index===0){
-    note("Reading aircraft start-up messages...");
-    lines.forEach((line,i)=>{
+  const type=challenges[current].visual;
+
+  // Values are parsed from actual Python output.
+  const r=record.parsed;
+  const v=record.values;
+
+  if(type==="budget"){
+    const chip=r["Chip cost"];
+    const sensor=r["Sensor cost"];
+    const total=r["Total cost"];
+
+    const max=Math.max(chip,sensor,1);
+
+    schedule(()=>{
+      animateNumber("chipCost",chip,"$");
+      $("chipBar").style.width=chip/max*100+"%";
+    },250);
+
+    schedule(()=>{
+      animateNumber("sensorCost",sensor,"$");
+      $("sensorBar").style.width=sensor/max*100+"%";
+    },850);
+
+    schedule(()=>{
+      animateNumber("totalCost",total,"$");
+      note("Purchase costs calculated successfully.");
+    },1550);
+  }
+
+  if(type==="memory"){
+    const total=r["Total bytes"];
+
+    const count=Math.min(
+      36,Math.max(0,Math.ceil(total/256))
+    );
+
+    for(let i=0;i<count;i++){
       schedule(()=>{
-        $("flightLabel").textContent=line;
-        result(line);
-      },500+i*850);
-    });
-    if(lines.includes("AVIONICS SYSTEM ONLINE") &&
-       lines.includes("NAVIGATION SYSTEM READY") &&
-       lines.includes("COMMUNICATION SYSTEM READY")){
-      schedule(()=>{
-        $("plane").classList.add("fly");
-        note("Aircraft systems reported ready.");
-      },lines.length*850+400);
+        $("mem"+i).classList.add("active");
+      },i*40);
     }
+
+    schedule(()=>{
+      animateNumber("totalBytes",total);
+      animateNumber("storageKib",r["Storage KiB"]);
+      note("Memory blocks illustrate the calculated data volume.");
+    },700);
   }
 
-  if(index===1){
-    note("Reading checklist entries...");
-    result(record.output.trimEnd());
-    ["Battery: ON","Navigation: READY","Radio: READY"]
-      .forEach((name,i)=>{
-        if(lines.includes(name)){
+  if(type==="production"){
+    const trays=r["Full trays"];
+
+    for(let i=0;i<Math.min(3,trays);i++){
+      schedule(()=>{
+        $("tray"+i).classList.add("active");
+      },i*350+200);
+    }
+
+    schedule(()=>{
+      animateNumber("fullTrays",trays);
+      animateNumber("leftovers",r["Leftover components"]);
+
+      note("Full trays and remaining components calculated. Tray icons are illustrative.");
+    },1200);
+  }
+
+  if(type==="wave"){
+    const original=Number(v[0]);
+    const amplified=r["Output amplitude"];
+
+    const scale=55/Math.max(
+      Math.abs(original),Math.abs(amplified),1
+    );
+
+    $("inputWave").setAttribute(
+      "d",wavePath(original,scale)
+    );
+
+    schedule(()=>{
+      $("outputWave").setAttribute(
+        "d",wavePath(amplified,scale)
+      );
+
+      $("outputWave").classList.add("animate");
+
+      animateNumber("amplitude",amplified);
+      animateNumber("squared",r["Squared signal"]);
+
+      note("Yellow: original signal. Green: amplified signal.");
+    },450);
+  }
+
+  if(type==="sensor"){
+    schedule(()=>{
+      setText("referenceValue",Number(v[0]));
+    },300);
+
+    schedule(()=>{
+      setText("testValue",Number(v[1]));
+    },700);
+
+    schedule(()=>{
+      setBoolean(
+        "sensorResult",
+        r["Readings match"],
+        "Readings match: "
+      );
+
+      note("The equality expression returned a Boolean value.");
+    },1200);
+  }
+
+  if(type==="scale"){
+    const a=Number(v[0]);
+    const b=Number(v[1]);
+
+    setText("massA",`A: ${a} g`);
+    setText("massB",`B: ${b} g`);
+
+    schedule(()=>{
+      const angle=
+        r["A is lighter"]?12:
+        r["A is heavier"]?-12:0;
+
+      $("scaleBeam").style.transform=
+        `rotate(${angle}deg)`;
+
+      $("scaleCaption").textContent=
+        `A < B: ${bool(r["A is lighter"])}  |  `+
+        `A > B: ${bool(r["A is heavier"])}`;
+
+      note("The scale responds to your comparison results.");
+    },500);
+  }
+
+  if(type==="digital"){
+    renderBits("bitsA",Number(v[0]));
+    renderBits("bitsB",Number(v[1]));
+
+    schedule(()=>{
+      setText("signalsDiffer",r["Signals differ"]);
+      setText("signalCompare",r["A at least B"]);
+
+      note("Both decimal inputs are visualised as 8-bit binary values.");
+    },950);
+  }
+
+  if(type==="and" || type==="or"){
+    const isAnd=type==="and";
+    const positive=isAnd?"yes":"online";
+
+    const a=v[0]===positive;
+    const b=v[1]===positive;
+
+    const result=isAnd
+      ?r["Access granted"]
+      :r["Channel available"];
+
+    schedule(()=>{
+      setText("logicValueA",a);
+
+      if(a){
+        $("logicA").classList.add("on");
+        $("wireA").classList.add("active");
+      }
+    },300);
+
+    schedule(()=>{
+      setText("logicValueB",b);
+
+      if(b){
+        $("logicB").classList.add("on");
+        $("wireB").classList.add("active");
+      }
+    },700);
+
+    schedule(()=>{
+      setText("logicResult",result);
+
+      if(result){
+        $("logicLight").classList.add("on");
+        $("wireOut").classList.add("active");
+      }
+
+      note(
+        isAnd
+          ?`AND result: ${bool(result)}`
+          :`OR result: ${bool(result)} | NOT result: ${bool(r["No channels online"])}`
+      );
+    },1300);
+  }
+
+  if(type==="satellite"){
+    schedule(()=>{
+      animateNumber("satData",r["Total data"]);
+    },250);
+
+    schedule(()=>{
+      animateNumber("satStorage",r["Remaining storage"]);
+    },850);
+
+    schedule(()=>{
+      setText("satFits",r["Data fits"]);
+    },1500);
+
+    schedule(()=>{
+      setText("satReady",r["Transfer ready"]);
+
+      if(r["Transfer ready"]){
+        for(let i=0;i<5;i++){
           schedule(()=>{
-            $("check"+i).classList.add("done");
-          },450+i*600);
+            $("packet"+i).classList.add("send");
+          },i*220);
         }
-      });
-    schedule(()=>{
-      note("Checklist updated from your Python output.");
-    },2400);
-  }
 
-  if([2,5,6,8].includes(index)){
-    note("Processing your aerospace system report...");
-    animateTerminal(lines);
-    schedule(()=>{
-      result(record.output.trimEnd());
-      note("Report generated from your Python output.");
-    },500+lines.length*450);
-  }
-
-  if(index===3){
-    note("Updating cockpit instruments...");
-    result(record.output.trimEnd());
-
-    const specs=[
-      {prefix:"Altitude: ",id:"dialAlt",needle:"needleAlt",
-       suffix:" ft"},
-      {prefix:"Speed: ",id:"dialSpeed",needle:"needleSpeed",
-       suffix:" knots"},
-      {prefix:"Voltage: ",id:"dialVolt",needle:"needleVolt",
-       suffix:" V"}
-    ];
-    specs.forEach((s,i)=>{
-      const line=lines.find(x=>x.startsWith(s.prefix));
-      if(!line)return;
-      const value=line.slice(s.prefix.length)
-        .replace(s.suffix,"").trim();
-      schedule(()=>{
-        $(s.id).textContent=value;
-        const n=Number(value);
-        if(Number.isFinite(n)){
-          const rotation=-90+
-            Math.min(Math.abs(n),3000)/3000*180;
-          $(s.needle).style.transform=
-            `translate(-50%,-100%) rotate(${rotation}deg)`;
-        }
-      },500+i*650);
-    });
-    schedule(()=>{
-      note("Cockpit values reflect your program's output.");
-    },2500);
-  }
-
-  if(index===4){
-    note("Reading aircraft identification data...");
-    result(record.output.trimEnd());
-    const a=lines.find(x=>x.startsWith("Aircraft: "));
-    const h=lines.find(x=>x.startsWith("Altitude: "));
-    const s=lines.find(x=>x.startsWith("Speed: "));
-    if(a&&h&&s){
-      schedule(()=>{
-        $("circuitLine").classList.add("active");
-        $("led").classList.add("on");
-        $("circuitCaption").textContent=a+" | DATA RECEIVED";
-        note("Flight monitoring console is active.");
-      },900);
-    }
-  }
-
-  if(index===7){
-    note("Reading the simulated battery measurement...");
-    result(record.output.trimEnd());
-    const measured=lines.find(x=>x.startsWith("Measured: "));
-    const difference=lines.find(x=>x.startsWith("Difference: "));
-    if(measured&&difference){
-      schedule(()=>{
-        $("circuitLine").classList.add("active");
-        $("led").classList.add("on");
-        $("circuitCaption").textContent=measured;
-        note("Electrical measurements received.");
-      },900);
-    }
-  }
-
-  if(index===9){
-    note("Receiving mission control telemetry...");
-    lines.forEach((line,i)=>{
-      schedule(()=>{
-        $("flightLabel").textContent=line;
-        result(line);
-      },400+i*550);
-    });
-    if(lines.includes("SYSTEM REPORT COMPLETE")){
-      schedule(()=>{
-        $("plane").classList.add("fly");
-        result(record.output.trimEnd());
-        note("Mission control report completed.");
-      },lines.length*550+500);
-    }
+        note("Virtual data transfer animation activated.");
+      }else{
+        note("The Boolean result is False. No virtual packets are transferred.");
+      }
+    },2000);
   }
 }
+
 function replayAnimation(){
-  if(running||current<0||current>=challenges.length)return;
+  if(running)return;
+
   animateExecution(lastRun[current]);
 }
 
-/* Real Python execution through Pyodide */
-const workerSource=`
+/* ==================================================
+   REAL PYTHON EXECUTION
+   AST VALIDATION:
+   - No if / elif / else
+   - No conditional expressions
+   - No loops or advanced structures
+   - Required operators must be present
+================================================== */
+
+const workerSource=String.raw`
 let pyodide=null;
+
 async function getPython(){
   if(!pyodide){
     importScripts(
       "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"
     );
+
     pyodide=await loadPyodide();
   }
+
   return pyodide;
 }
+
 self.onmessage=async event=>{
-  const {id,code,values}=event.data;
+  const {id,code,values,required}=event.data;
+
   try{
     const py=await getPython();
-    py.globals.set("_challenge_payload",
-      JSON.stringify({code,values})
+
+    py.globals.set(
+      "_challenge_payload",
+      JSON.stringify({code,values,required})
     );
-    let output;
-    try{
-      output=await py.runPythonAsync(\`
-import json
-import io
-import contextlib
-import builtins
-import traceback
 
-payload=json.loads(_challenge_payload)
-inputs=iter(payload["values"])
-capture=io.StringIO()
+    const result=await py.runPythonAsync(
+      PYTHON_SOURCE
+    );
 
-def custom_input(prompt=""):
-    try:
-        return next(inputs)
-    except StopIteration:
-        raise EOFError("Not enough input values")
+    py.globals.delete("_challenge_payload");
 
-custom_builtins=dict(vars(builtins))
-custom_builtins["input"]=custom_input
-scope={
-    "__name__":"__main__",
-    "__builtins__":custom_builtins
-}
-try:
-    with contextlib.redirect_stdout(capture):
-        exec(payload["code"],scope)
-except Exception:
-    with contextlib.redirect_stdout(capture):
-        traceback.print_exc(limit=2)
-capture.getvalue()
-\`);
-    }finally{
-      py.globals.delete("_challenge_payload");
-    }
     self.postMessage({
-      id,success:true,output:String(output)
+      id,
+      success:true,
+      result:JSON.parse(String(result))
     });
+
   }catch(error){
     self.postMessage({
-      id,success:false,
+      id,
+      success:false,
       error:String(error.message||error)
     });
   }
 };
 `;
 
+const pythonSource=`
+import ast
+import json
+import io
+import contextlib
+import traceback
+
+payload=json.loads(_challenge_payload)
+
+def run_student():
+    try:
+        tree=ast.parse(payload["code"])
+
+        forbidden=(
+            ast.If,
+            ast.IfExp,
+            ast.For,
+            ast.While,
+            ast.AsyncFor,
+            ast.Match,
+            ast.Try,
+            ast.With,
+            ast.AsyncWith,
+            ast.FunctionDef,
+            ast.AsyncFunctionDef,
+            ast.ClassDef,
+            ast.Lambda,
+            ast.ListComp,
+            ast.SetComp,
+            ast.DictComp,
+            ast.GeneratorExp,
+            ast.Import,
+            ast.ImportFrom
+        )
+
+        for node in ast.walk(tree):
+            if isinstance(node, forbidden):
+                return {
+                    "output":"",
+                    "error":"Use only inputs, variables, operators and print(). No if, elif, else or loops."
+                }
+
+        allowed_calls={
+            "print","input","int","float",
+            "str","bool","round","abs"
+        }
+
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Call):
+                if not isinstance(node.func, ast.Name):
+                    return {
+                        "output":"",
+                        "error":"Use the basic Python functions taught in this lesson."
+                    }
+                if node.func.id not in allowed_calls:
+                    return {
+                        "output":"",
+                        "error":"Unsupported function: "+node.func.id
+                    }
+
+            if isinstance(node, ast.Attribute):
+                return {
+                    "output":"",
+                    "error":"Use basic expressions for this challenge."
+                }
+
+        used_operators={
+            type(node).__name__
+            for node in ast.walk(tree)
+        }
+
+        missing=[
+            name for name in payload["required"]
+            if name not in used_operators
+        ]
+
+        operator_names={
+            "Add":"+",
+            "Sub":"-",
+            "Mult":"*",
+            "Div":"/",
+            "FloorDiv":"//",
+            "Mod":"%",
+            "Pow":"**",
+            "Eq":"==",
+            "NotEq":"!=",
+            "Lt":"<",
+            "Gt":">",
+            "LtE":"<=",
+            "GtE":">=",
+            "And":"and",
+            "Or":"or",
+            "Not":"not"
+        }
+
+        if missing:
+            names=", ".join(
+                operator_names.get(x,x)
+                for x in missing
+            )
+            return {
+                "output":"",
+                "error":"Include the required operator(s): "+names
+            }
+
+        input_calls=[
+            node for node in ast.walk(tree)
+            if isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id=="input"
+        ]
+
+        if len(input_calls)!=len(payload["values"]):
+            return {
+                "output":"",
+                "error":"Collect all input values using input()."
+            }
+
+        values=iter(payload["values"])
+        capture=io.StringIO()
+
+        def custom_input(prompt=""):
+            try:
+                return next(values)
+            except StopIteration:
+                raise EOFError("Not enough input values.")
+
+        safe_builtins={
+            "print":print,
+            "input":custom_input,
+            "int":int,
+            "float":float,
+            "str":str,
+            "bool":bool,
+            "round":round,
+            "abs":abs
+        }
+
+        scope={
+            "__builtins__":safe_builtins,
+            "__name__":"__main__"
+        }
+
+        with contextlib.redirect_stdout(capture):
+            exec(
+                compile(tree,"<student>","exec"),
+                scope
+            )
+
+        return {
+            "output":capture.getvalue(),
+            "error":None
+        }
+
+    except Exception as error:
+        return {
+            "output":"",
+            "error":type(error).__name__+": "+str(error)
+        }
+
+json.dumps(run_student())
+`;
+
+let worker=null;
+let requests=new Map();
+let requestId=0;
+
 function createWorker(){
+  const source=
+    "const PYTHON_SOURCE="+
+    JSON.stringify(pythonSource)+
+    ";\n"+workerSource;
+
   const blob=new Blob(
-    [workerSource],{type:"text/javascript"}
+    [source],
+    {type:"text/javascript"}
   );
+
   const url=URL.createObjectURL(blob);
   const instance=new Worker(url);
+
   URL.revokeObjectURL(url);
+
   return instance;
 }
-function ensureWorker(){
-  if(worker)return worker;
-  worker=createWorker();
-  worker.onmessage=event=>{
-    const {id,success,output,error}=event.data;
-    const pending=requests.get(id);
-    if(!pending)return;
-    clearTimeout(pending.timeout);
-    requests.delete(id);
-    if(success)pending.resolve(output);
-    else pending.reject(new Error(error));
-  };
-  worker.onerror=event=>{
-    resetWorker(new Error(event.message||"Python worker failed."));
-  };
-  return worker;
-}
+
 function resetWorker(error){
   if(worker){
     worker.terminate();
     worker=null;
   }
+
   for(const pending of requests.values()){
     clearTimeout(pending.timeout);
     pending.reject(error);
   }
+
   requests.clear();
 }
-function executePython(code,values){
+
+function ensureWorker(){
+  if(worker)return worker;
+
+  worker=createWorker();
+
+  worker.onmessage=event=>{
+    const {id,success,result,error}=event.data;
+
+    const pending=requests.get(id);
+
+    if(!pending)return;
+
+    clearTimeout(pending.timeout);
+    requests.delete(id);
+
+    if(success){
+      pending.resolve(result);
+    }else{
+      pending.reject(new Error(error));
+    }
+  };
+
+  worker.onerror=event=>{
+    resetWorker(
+      new Error(event.message||"Python engine failed.")
+    );
+  };
+
+  return worker;
+}
+
+function executePython(code,values,required){
   return new Promise((resolve,reject)=>{
     let instance;
+
     try{
       instance=ensureWorker();
     }catch(error){
       reject(error);
       return;
     }
+
     const id=++requestId;
+
     const timeout=setTimeout(()=>{
-      resetWorker(new Error("Python execution timed out."));
-    },30000);
-    requests.set(id,{resolve,reject,timeout});
-    instance.postMessage({id,code,values});
+      resetWorker(
+        new Error("Python execution timed out.")
+      );
+    },45000);
+
+    requests.set(id,{
+      resolve,reject,timeout
+    });
+
+    instance.postMessage({
+      id,code,values,required
+    });
   });
 }
 
-function checkConcept(code,rule){
-  const withoutComments=code.split("\n")
-    .filter(line=>!line.trimStart().startsWith("#"))
-    .join("\n");
-  const prints=(withoutComments.match(/\bprint\s*\(/g)||[]).length;
-  const inputs=(withoutComments.match(/\binput\s*\(/g)||[]).length;
+/* ==================================================
+   ROBUST OUTPUT VALIDATION
 
-  if(rule==="print3"){
-    return prints===3?null:"Use exactly three print() statements.";
+   Accepts:
+   50 and 50.0
+   0 and 0.0
+   Equivalent floating-point results
+
+   Boolean values must be True or False.
+================================================== */
+
+function validateOutput(output,expected){
+  const text=String(output)
+    .replace(/\r\n/g,"\n")
+    .trim();
+
+  const lines=text?text.split("\n"):[];
+
+  if(lines.length!==expected.length){
+    return {
+      passed:false,
+      message:`Expected ${expected.length} output lines, but received ${lines.length}.`
+    };
   }
-  if(rule==="triple"){
-    if(prints!==1)return "Use one print() statement.";
-    if(!withoutComments.includes("'''")){
-      return "Use triple single quotes (''').";
+
+  const parsed={};
+
+  for(let i=0;i<expected.length;i++){
+    const [label,value]=expected[i];
+
+    const line=lines[i].trim();
+    const prefix=label+":";
+
+    if(!line.startsWith(prefix)){
+      return {
+        passed:false,
+        message:`Line ${i+1} should start with "${prefix}".`
+      };
     }
-    return null;
-  }
-  if(rule==="newline"){
-    if(prints!==1)return "Use one print() statement.";
-    if(!withoutComments.includes("\\n")){
-      return "Use the \\n escape character.";
-    }
-    return null;
-  }
-  if(rule==="variables"){
-    for(const name of ["altitude","speed","voltage"]){
-      if(!new RegExp("\\b"+name+"\\s*=").test(withoutComments)){
-        return "Create the variable: "+name;
+
+    const actual=line.slice(prefix.length).trim();
+
+    if(typeof value==="boolean"){
+      if(actual!==bool(value)){
+        return {
+          passed:false,
+          message:`Check the Boolean expression for "${label}".`
+        };
       }
+
+      parsed[label]=actual==="True";
+      continue;
     }
-    if(prints<3)return "Print all three instrument readings.";
-    const printLines=withoutComments.split("\n")
-      .filter(line=>/\bprint\s*\(/.test(line));
-    for(const name of ["altitude","speed","voltage"]){
-      if(!printLines.some(line=>
-        new RegExp("\\b"+name+"\\b").test(line)
-      )){
-        return "Use "+name+" inside a print() statement.";
+
+    if(typeof value==="number"){
+      const validNumber=
+        /^[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i
+          .test(actual);
+
+      const number=Number(actual);
+
+      const tolerance=
+        Math.max(1e-9,Math.abs(value)*1e-10);
+
+      if(!validNumber ||
+         !Number.isFinite(number) ||
+         Math.abs(number-value)>tolerance){
+
+        return {
+          passed:false,
+          message:`Check your calculation for "${label}".`
+        };
       }
+
+      parsed[label]=number;
+      continue;
     }
-    return null;
+
+    if(actual!==String(value)){
+      return {
+        passed:false,
+        message:`Check the output for "${label}".`
+      };
+    }
+
+    parsed[label]=actual;
   }
-  if(rule==="input"){
-    if(inputs<3)return "Use input() to collect all three values.";
-    if(prints<1)return "Print the completed flight report.";
-    return null;
-  }
-  if(rule==="maintenance"){
-    if(!withoutComments.includes("'''")){
-      return "Use triple single quotes for the heading.";
-    }
-    for(const name of ["technician","aircraft","battery"]){
-      if(!new RegExp("\\b"+name+"\\s*=").test(withoutComments)){
-        return "Create the variable: "+name;
-      }
-    }
-    return null;
-  }
-  if(rule==="navigation"){
-    if(inputs<2)return "Collect both coordinates using input().";
-    if(!withoutComments.includes("\\n")){
-      return "Use the \\n escape character.";
-    }
-    return null;
-  }
-  if(rule==="battery"){
-    if(!/\bfloat\s*\(\s*input\s*\(/.test(withoutComments)){
-      return "Convert the voltage input using float().";
-    }
-    if(!/\b28\b/.test(withoutComments)){
-      return "Store the nominal voltage of 28 V.";
-    }
-    if(!withoutComments.includes("-")){
-      return "Calculate measured voltage minus nominal voltage.";
-    }
-    return null;
-  }
-  if(rule==="recorder"){
-    if(inputs<4)return "Collect all four flight readings using input().";
-    return null;
-  }
-  if(rule==="mission"){
-    if(inputs<5)return "Collect all five inputs.";
-    if(!withoutComments.includes("'''")){
-      return "Use triple single quotes for the mission heading.";
-    }
-    return null;
-  }
-  return null;
-}
-function normalize(text){
-  return String(text).replace(/\r\n/g,"\n").trim();
-}
-function hasPythonError(text){
-  return /(^|\n)(Traceback \(most recent call last\):|[A-Za-z]+Error:|SyntaxError:)/.test(text);
+
+  return {
+    passed:true,
+    parsed
+  };
 }
 
-/*
-  CHALLENGE 8 FIX:
-  Compare the numeric battery readings using a tolerance,
-  instead of requiring identical floating-point text.
-*/
-function batteryOutputMatches(actual,values){
-  const lines=normalize(actual).split("\n");
-  if(lines.length!==3)return false;
-  if(lines[0]!=="BATTERY MONITOR")return false;
+/* ==================================================
+   RUN AND TEST
+================================================== */
 
-  const measuredMatch=lines[1].match(
-    /^Measured:\s*(-?(?:\d+\.?\d*|\.\d+)) V$/
-  );
-  const differenceMatch=lines[2].match(
-    /^Difference:\s*(-?(?:\d+\.?\d*|\.\d+)) V$/
-  );
-
-  if(!measuredMatch||!differenceMatch)return false;
-
-  const measured=Number(measuredMatch[1]);
-  const difference=Number(differenceMatch[1]);
-  const expectedMeasured=Number(values[0]);
-  const expectedDifference=expectedMeasured-28;
-
-  if(!Number.isFinite(measured)||
-     !Number.isFinite(difference))return false;
-
-  const tolerance=1e-9;
-
-  return (
-    Math.abs(measured-expectedMeasured)<=tolerance &&
-    Math.abs(difference-expectedDifference)<=tolerance
-  );
-}
-function outputMatches(actual,expected,c,values){
-  if(c.numericValidation){
-    return batteryOutputMatches(actual,values);
-  }
-  return normalize(actual)===normalize(expected);
-}
-function expectedFor(c,values){
-  return c.expectedFor?c.expectedFor(values):c.expected;
-}
 function showFeedback(message,good=false){
   $("feedback").textContent=message;
-  $("feedback").className="feedback "+(good?"good":"bad");
+  $("feedback").className=
+    "feedback "+(good?"good":"bad");
 }
-function celebrate(){
+
+function celebrate(count=100){
   if(typeof confetti==="function"){
     confetti({
-      particleCount:90,
+      particleCount:count,
       spread:75,
       origin:{y:.65},
-      colors:["#5E48C4","#FFD071","#7B6ED4","#28B5CB"]
+      colors:[
+        "#5E48C4",
+        "#FFD071",
+        "#7B6ED4",
+        "#28B5CB"
+      ]
     });
   }
 }
+
 async function runCode(){
-  if(running||current<0||current>=challenges.length)return;
+  if(running ||
+     current<0 ||
+     current>=challenges.length)return;
 
   const index=current;
   const c=challenges[index];
   const code=$("editor").value;
   const values=getValues();
-  savedCode[index]=code;
 
-  if(values.some(v=>v.trim()==="")){
-    showFeedback("Complete all test input fields.");
-    return;
-  }
-  const conceptError=checkConcept(code,c.rule);
-  if(conceptError){
-    showFeedback(conceptError);
+  savedCode[index]=code;
+  savedInputs[index]=values;
+
+  const inputError=validateInputs(c,values);
+
+  if(inputError){
+    showFeedback(inputError);
     return;
   }
 
   running=true;
+
   $("runBtn").disabled=true;
   $("runBtn").textContent="Running...";
-  $("feedback").textContent="Executing Python...";
+  $("nextChallenge").disabled=true;
+
   $("feedback").className="feedback";
+  $("feedback").textContent="Executing Python...";
   $("output").textContent="Running Python...";
+
+  updateNav();
   clearAnimation();
   buildVisual();
 
   try{
-    const output=await executePython(code,values);
-    if(current!==index)return;
+    const result=await executePython(
+      code,values,c.required
+    );
 
-    const record={
-      values:[...values],
-      output,
-      error:hasPythonError(output)
-    };
-    lastRun[index]=record;
-    $("output").textContent=output||"(No output)";
-    animateExecution(record);
+    if(result.error){
+      $("output").textContent=
+        result.error;
 
-    if(record.error){
-      showFeedback("Python reported an error. Check your code.");
+      showFeedback(result.error);
+
+      lastRun[index]={
+        output:result.error,
+        passed:false
+      };
+
+      note("Check your Python code.");
       return;
     }
 
-    const visiblePass=outputMatches(
-      output,expectedFor(c,values),c,values
-    );
-    let allPass=visiblePass;
+    $("output").textContent=
+      result.output || "(No output)";
 
-    if(allPass){
-      for(const testValues of c.tests){
-        const testOutput=await executePython(code,testValues);
-        if(!outputMatches(
-          testOutput,
-          expectedFor(c,testValues),
-          c,
-          testValues
-        )){
-          allPass=false;
-          break;
-        }
+    const check=validateOutput(
+      result.output,
+      c.expected(values)
+    );
+
+    if(!check.passed){
+      showFeedback(check.message);
+
+      lastRun[index]={
+        output:result.output,
+        passed:false
+      };
+
+      note("Review the expected output and your calculations.");
+      return;
+    }
+
+    $("feedback").textContent=
+      "Checking additional input combinations...";
+
+    for(let i=0;i<c.tests.length;i++){
+      const testValues=c.tests[i];
+
+      const test=await executePython(
+        code,testValues,c.required
+      );
+
+      const validation=test.error
+        ?{passed:false,message:test.error}
+        :validateOutput(
+          test.output,
+          c.expected(testValues)
+        );
+
+      if(!validation.passed){
+        const testDetails=c.inputs.map(
+          (item,j)=>`${item.label}: ${testValues[j]}`
+        ).join("\n");
+
+        showFeedback(
+          "Your current input works, but another test failed.\n\n"+
+          testDetails+"\n\n"+
+          validation.message
+        );
+
+        lastRun[index]={
+          output:result.output,
+          passed:false
+        };
+
+        note("Try the additional input shown in the feedback.");
+        return;
       }
     }
-    if(current!==index)return;
 
-    if(allPass){
-      const firstSolve=!completed.has(index);
-      completed.add(index);
-      showFeedback(
-        "Mission completed! Your Python output passed the checks.",
-        true
-      );
-      $("nextChallenge").disabled=false;
-      if(firstSolve)celebrate();
-    }else{
-      showFeedback(
-        visiblePass
-          ?"This input works, but another test case failed."
-          :"Output mismatch. Check the text, spacing and line breaks."
-      );
+    const firstSolve=!completed.has(index);
+
+    completed.add(index);
+
+    lastRun[index]={
+      output:result.output,
+      values:[...values],
+      parsed:check.parsed,
+      passed:true
+    };
+
+    animateExecution(lastRun[index]);
+
+    showFeedback(
+      "Challenge completed! All test cases passed.",
+      true
+    );
+
+    if(firstSolve){
+      celebrate();
     }
-    updateNav();
 
   }catch(error){
-    if(current===index){
-      const message=String(error.message||error);
-      $("output").textContent=message;
-      lastRun[index]={
-        values:[...values],output:message,error:true
-      };
-      animateExecution(lastRun[index]);
-      showFeedback("Python could not complete the program.");
-    }
+    $("output").textContent=
+      String(error.message||error);
+
+    showFeedback(
+      "Python could not complete the program. Check your connection and try again."
+    );
+
   }finally{
     running=false;
+
     $("runBtn").disabled=false;
+
     $("runBtn").innerHTML=
       '<i class="fa-solid fa-play"></i> Run Code';
+
+    $("nextChallenge").disabled=
+      !completed.has(current);
+
+    updateNav();
   }
 }
 
-function nextChallenge(){
-  if(running||current<0||!completed.has(current))return;
-  savedCode[current]=$("editor").value;
-  current++;
-  render();
-}
-function previous(){
-  if(running||current<0)return;
-  if(current<challenges.length){
-    savedCode[current]=$("editor").value;
-  }
-  current--;
-  render();
-}
-function forward(){
-  if(current===-1){
-    start();
-    return;
-  }
-  if(current>=challenges.length)return;
-  nextChallenge();
-}
-function updateNav(){
-  $("prevBtn").disabled=current<0;
-  $("navNext").disabled=
-    current>=challenges.length||
-    (current>=0&&!completed.has(current));
+/* ==================================================
+   EDITOR CONTROLS
+================================================== */
 
-  $("navInfo").textContent=
-    current<0?"Aerospace Python":
-    current>=challenges.length?"Completed":
-    `Challenge ${current+1} / ${challenges.length}`;
-
-  $("progress").textContent=completed.size;
-}
-function showFinish(){
-  clearAnimation();
-  current=challenges.length;
-  $("finalCount").textContent=
-    `${completed.size} / ${challenges.length}`;
-  show("finish");
-  celebrate();
-}
-function restart(){
-  clearAnimation();
-  current=-1;
-  completed.clear();
-  savedCode={};
-  lastRun={};
-  show("intro");
-}
 $("editor").addEventListener("input",()=>{
-  if(current>=0&&current<challenges.length){
+  if(current>=0 && current<challenges.length){
     savedCode[current]=$("editor").value;
   }
 });
-$("editor").addEventListener("keydown",e=>{
-  if(e.key==="Tab"){
-    e.preventDefault();
-    e.target.setRangeText(
+
+$("editor").addEventListener("keydown",event=>{
+  if(event.key==="Tab"){
+    event.preventDefault();
+
+    event.target.setRangeText(
       "    ",
-      e.target.selectionStart,
-      e.target.selectionEnd,
+      event.target.selectionStart,
+      event.target.selectionEnd,
       "end"
     );
   }
-});
-document.addEventListener("keydown",e=>{
-  if(["TEXTAREA","INPUT","SELECT"].includes(e.target.tagName)){
-    return;
+
+  if(event.key==="Enter" &&
+     (event.ctrlKey||event.metaKey)){
+    event.preventDefault();
+    runCode();
   }
-  if(e.key==="ArrowLeft")previous();
-  if(e.key==="ArrowRight")forward();
 });
+
+document.addEventListener("keydown",event=>{
+  if(["TEXTAREA","INPUT","SELECT"].includes(
+    event.target.tagName
+  ))return;
+
+  if(event.key==="ArrowLeft")previous();
+  if(event.key==="ArrowRight")forward();
+});
+
 updateNav();
+
 </script>
 </body>
 </html>
