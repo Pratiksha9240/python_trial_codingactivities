@@ -3239,85 +3239,160 @@ function executePython(code,values,required){
    Boolean values must be True or False.
 ================================================== */
 
-function validateOutput(output,expected){
-  const text=String(output)
-    .replace(/\r\n/g,"\n")
-    .trim();
 
-  const lines=text?text.split("\n"):[];
+ 
+  
+   
 
-  if(lines.length!==expected.length){
+function validateOutput(output, expected) {
+
+  // Ignore spaces, tabs and capitalization in labels.
+  function normalizeLabel(text) {
+    return String(text)
+      .replace(/\s+/g, "")
+      .toLowerCase();
+  }
+
+  // Ignore extra blank lines.
+  const lines = String(output)
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+
+  if (lines.length !== expected.length) {
     return {
-      passed:false,
-      message:`Expected ${expected.length} output lines, but received ${lines.length}.`
+      passed: false,
+      message:
+        `Display all ${expected.length} required results, ` +
+        `each on a separate line.`
     };
   }
 
-  const parsed={};
+  const parsed = {};
 
-  for(let i=0;i<expected.length;i++){
-    const [label,value]=expected[i];
+  for (let i = 0; i < expected.length; i++) {
 
-    const line=lines[i].trim();
-    const prefix=label+":";
+    const [label, expectedValue] = expected[i];
+    const line = lines[i];
 
-    if(!line.startsWith(prefix)){
+    // Separate the label from its value.
+    const colonIndex = line.indexOf(":");
+
+    if (colonIndex === -1) {
       return {
-        passed:false,
-        message:`Line ${i+1} should start with "${prefix}".`
+        passed: false,
+        message: `Include the label "${label}:" in your output.`
       };
     }
 
-    const actual=line.slice(prefix.length).trim();
+    const actualLabel = line
+      .slice(0, colonIndex)
+      .trim();
 
-    if(typeof value==="boolean"){
-      if(actual!==bool(value)){
+    const actualValue = line
+      .slice(colonIndex + 1)
+      .trim();
+
+    // Compare labels without worrying about spaces.
+    if (
+      normalizeLabel(actualLabel) !==
+      normalizeLabel(label)
+    ) {
+      return {
+        passed: false,
+        message: `Display the result for "${label}" on line ${i + 1}.`
+      };
+    }
+
+    // BOOLEAN VALIDATION
+    if (typeof expectedValue === "boolean") {
+
+      const expectedBoolean =
+        expectedValue ? "True" : "False";
+
+      if (actualValue !== expectedBoolean) {
         return {
-          passed:false,
-          message:`Check the Boolean expression for "${label}".`
+          passed: false,
+          message: `Check your Boolean expression for "${label}".`
         };
       }
 
-      parsed[label]=actual==="True";
+      parsed[label] = actualValue === "True";
       continue;
     }
 
-    if(typeof value==="number"){
-      const validNumber=
+    // NUMERIC VALIDATION
+    if (typeof expectedValue === "number") {
+
+      // Accept integers, decimals and scientific notation.
+      const validNumber =
         /^[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i
-          .test(actual);
+          .test(actualValue);
 
-      const number=Number(actual);
-
-      const tolerance=
-        Math.max(1e-9,Math.abs(value)*1e-10);
-
-      if(!validNumber ||
-         !Number.isFinite(number) ||
-         Math.abs(number-value)>tolerance){
-
+      if (!validNumber) {
         return {
-          passed:false,
-          message:`Check your calculation for "${label}".`
+          passed: false,
+          message: `Display a numeric result for "${label}".`
         };
       }
 
-      parsed[label]=number;
+      const actualNumber = Number(actualValue);
+
+      if (
+        !Number.isFinite(actualNumber) ||
+        !Number.isFinite(expectedValue)
+      ) {
+        return {
+          passed: false,
+          message: `Check your calculation for "${label}".`
+        };
+      }
+
+      // Handle floating-point precision differences.
+      const absoluteTolerance = 1e-9;
+      const relativeTolerance = 1e-12;
+
+      const tolerance = Math.max(
+        absoluteTolerance,
+        relativeTolerance * Math.max(
+          Math.abs(actualNumber),
+          Math.abs(expectedValue)
+        )
+      );
+
+      const difference = Math.abs(
+        actualNumber - expectedValue
+      );
+
+      if (difference > tolerance) {
+        return {
+          passed: false,
+          message: `Check your calculation for "${label}".`
+        };
+      }
+
+      // Preserve the actual numeric output for animations.
+      parsed[label] = actualNumber;
       continue;
     }
 
-    if(actual!==String(value)){
+    // TEXT VALIDATION
+    if (
+      normalizeLabel(actualValue) !==
+      normalizeLabel(expectedValue)
+    ) {
       return {
-        passed:false,
-        message:`Check the output for "${label}".`
+        passed: false,
+        message: `Check your result for "${label}".`
       };
     }
 
-    parsed[label]=actual;
+    parsed[label] = actualValue;
   }
 
   return {
-    passed:true,
+    passed: true,
     parsed
   };
 }
